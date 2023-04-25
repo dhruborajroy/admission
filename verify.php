@@ -50,7 +50,8 @@ if(isset($_GET['email']) && $_GET['email']!='' && isset($_GET['code']) && $_GET[
      'title'=>'Error',
    );
    redirect("index");
-}?>
+}
+?>
 <div class="breadcrumb-bar">
    <div class="container">
       <div class="row">

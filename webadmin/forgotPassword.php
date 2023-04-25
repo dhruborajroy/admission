@@ -1,10 +1,10 @@
 <?php 
    session_start();
-   session_regenerate_id();
-   include('./inc/function.inc.php');
-   include('./inc/connection.inc.php');
-   include('./inc/constant.inc.php');
-   require_once("./inc/smtp/class.phpmailer.php");
+//    session_regenerate_id();
+   include('../inc/function.inc.php');
+   include('../inc/connection.inc.php');
+   include('../inc/constant.inc.php');
+   require_once("../inc/smtp/class.phpmailer.php");
    $msg="";
    // if(isset($_SESSION['USER_LOGIN'])){
    //     redirect('index.php');
@@ -118,7 +118,7 @@
         }else{
             jQuery('.sendOtpButton').html("please wait...");
             jQuery.ajax({
-                url:'./ajax/sendEmail.php',
+                url:'./ajax/sendEmail',
                 type:'post',
                 data:'email='+email+'&type=otp',
                 success: function (result){
@@ -127,13 +127,17 @@
                         jQuery('#email').attr('disabled',true);
                         jQuery('#sendOTP').hide();
                         jQuery('#otp_box').show();
+                    }else if(result=='not_registered'){
+                        jQuery('#verifyOTP').html('Verify Otp');
+                        jQuery('#otp_error').html("Email Not registered");
+                        jQuery('.sendOtpButton').html("Submit");
                     }else{
                         jQuery('#email_error').html("Please try after sometime");
+                        jQuery('.sendOtpButton').html("Submit");
                     }
                 }
             });
         }
-
     }
     function verifyOTP(){
         jQuery('#otp_error').html("");
@@ -143,7 +147,7 @@
         }else{
             jQuery('#verifyOTP').html('Please Wait');
             jQuery.ajax({
-                url:'./ajax/checkOTP.php',
+                url:'./ajax/checkOTP',
                 type:'post',
                 data:'otp='+otp,
                 success: function (result){

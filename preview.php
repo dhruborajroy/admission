@@ -1,7 +1,17 @@
 <?php
 include("header.php");
-if(isset($_GET['application_id']) && $_GET['application_id']!=""){
-   $application_id=get_safe_value($_GET['application_id']);
+if(!isset($_SESSION['APPLICATION_ID'])) {
+   $_SESSION['TOASTR_MSG']=array(
+      'type'=>'error',
+      'body'=>'You don\'t have the permission to access that page',
+      'title'=>'Error',
+   );
+   redirect("apply");
+}
+$application_id=$_SESSION['APPLICATION_ID'];
+// prx($_SESSION);
+if(isset($_SESSION['NUMBER_VEFIED']) && $application_id!=""){
+   $application_id=get_safe_value($application_id);
    $sql="SELECT * FROM `applicants` where id='$application_id' and final_submit!=1";
    $res=mysqli_query($con,$sql);
    if(mysqli_num_rows($res)>0){
@@ -25,7 +35,6 @@ if(isset($_GET['application_id']) && $_GET['application_id']!=""){
       $localGuardianNid=$row['localGuardianNid'];
       $email=$row['email'];
       $image=$row['image'];
-      // $password=$row['password'];
       $class=$row['class'];
    }else{
       $_SESSION['TOASTR_MSG']=array(
@@ -33,7 +42,7 @@ if(isset($_GET['application_id']) && $_GET['application_id']!=""){
          'body'=>'You don\'t have the permission to access the location!',
          'title'=>'Error',
       );
-      redirect("index");
+      // redirect("index");
    }
 }else{
    $_SESSION['TOASTR_MSG']=array(
@@ -41,7 +50,7 @@ if(isset($_GET['application_id']) && $_GET['application_id']!=""){
       'body'=>'You don\'t have the permission to access the location!',
       'title'=>'Error',
    );
-   redirect("index");
+   // redirect("index");
 }
 
 //Bkash Payment started
@@ -102,11 +111,19 @@ if(isset($_GET['status'])){
                redirect($createPayment['bkashURL']);
                die;
             }else{
-               $msg="Something Went Wrong";
+               $_SESSION['TOASTR_MSG']=array(
+                  'type'=>'error',
+                  'body'=>'Something went wrong!',
+                  'title'=>'Error',
+               );
             }
          }
       }else{
-         $msg="Something Went Wrong";
+         $_SESSION['TOASTR_MSG']=array(
+            'type'=>'error',
+            'body'=>'Something went wrong!',
+            'title'=>'Error',
+         );
       }
    }
 ?>
@@ -117,8 +134,10 @@ if(isset($_GET['status'])){
             <div class="breadcrumb-list">
                <nav aria-label="breadcrumb" class="page-breadcrumb">
                   <ol class="breadcrumb">
-                     <li class="breadcrumb-item"><a href="index">Home</a></li>
-                     <li class="breadcrumb-item" aria-current="page">Preview</li>
+                  <li class="breadcrumb-item"><a href="index">Home</a></li>
+                     <li class="breadcrumb-item">Apply</li>
+                     <li class="breadcrumb-item">Mobile number verification</li>
+                     <li class="breadcrumb-item" style="color:#ff5364">Preview</li>
                   </ol>
                </nav>
             </div>
@@ -133,10 +152,10 @@ if(isset($_GET['status'])){
             <div class="settings-inner-blk p-0">
                <div class="sell-course-head comman-space">
                   <h3 align="center">Basic Informations</h3>
-                  <table>
+                  <table width="100%">
                   <tr>
-                     <td></td>
-                     <td><img src="./media/users/<?php echo $image?>" alt="preview image" width="300px" height="300px" align="right"></td>
+                     <!-- <td></td> -->
+                     <td align="center"><img style="border-radius: 15px;width: 80%;max-width: 300px;max-height: 300px;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;" src="./media/users/<?php echo $image?>" alt="preview image" width="300px" height="300px"></td>
                   </tr>
                   </table>
                   <table id="preview">
@@ -274,7 +293,7 @@ if(isset($_GET['status'])){
                               <div class="go-dashboard text-center ">
                                     <div class="alert alert-warning">Without payment the application will not submitted properly.</div>
                                     <br>
-                                    <button type="submit" name="bkash" class="btn btn-success">
+                                    <button type="submit" name="bkash" class="btn btn-primary">
                                        Pay & Submit Your application
                                        <img src="./assets/img/bkash.png" weight="100px" height="70px" alt="Bkash Payment" >
                                     </button>

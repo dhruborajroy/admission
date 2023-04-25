@@ -1,10 +1,10 @@
 <?php 
 session_start();
-session_regenerate_id();
-include('./inc/function.inc.php');
-include('./inc/connection.inc.php');
-include('./inc/constant.inc.php');
-require_once("./inc/smtp/class.phpmailer.php");
+//session_regenerate_id();
+include('../inc/function.inc.php');
+include('../inc/connection.inc.php');
+include('../inc/constant.inc.php');
+require_once("../inc/smtp/class.phpmailer.php");
 $msg="";
 if(!isset($_SESSION['FORGOT_PASSWORD'])){
     redirect('index.php');

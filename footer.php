@@ -120,16 +120,8 @@
             }
             var filename=image.value;
             if(filename==""){
-                  toastr["Error"]("You have to select image", "Image Error");
+               toastr["Error"]("You have to select image", "Image Error");
             }
-         }
-
-         var filename=image.value;
-         function checkImage(){
-            if(filename==""){
-            // toastrMsg("Error","You have to select image", "Image Error");
-            toastr["error"]("You have to select image","Image Error");
-         }
          }
          //info
          //warning

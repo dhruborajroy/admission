@@ -1,6 +1,6 @@
 <?php 
    session_start();
-   session_regenerate_id();
+//    session_regenerate_id();
    require('../inc/constant.inc.php');
    require('../inc/connection.inc.php');
    require('../inc/function.inc.php');

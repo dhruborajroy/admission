@@ -31,9 +31,9 @@ function send_email($email,$html,$subject,$attachment=""){
 	$mail->Port=587;
 	$mail->SMTPSecure="tls";
 	$mail->SMTPAuth=true;
-	$mail->Username="hackerdhrubo99@gmail.com";
-	$mail->Password="dxnhfotcvjcozaex";
-    $mail->setFrom('hackerdhrubo99@gmail.com', 'Dhrubo');
+    $mail->Username="dhrubo.bec.ce04@gmail.com";
+    $mail->Password="dqfiqswgsfjmhshn";
+    // $mail->setFrom('hackerdhrubo99@gmail.com', 'Dhrubo');
 	$mail->addAddress($email);
 	$mail->IsHTML(true);
 	$mail->Subject=$subject;
@@ -92,6 +92,11 @@ function maskEmail($email, $minLength =1, $maxLength = 10, $mask = "***") {
 
     $shortenedEmail = (($len > $minLength) ? substr($name, 0, $maxLength) : "");
     return  "{$shortenedEmail}{$mask}{$domain}";
+}
+
+function maskNumber($number) {
+    $number = substr($number,0,4).substr_replace($number, str_repeat("X", 3), 0, 9).substr($number,9,11);
+    return $number;
 }
 
 function get_content($URL){

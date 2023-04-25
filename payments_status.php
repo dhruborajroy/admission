@@ -7,7 +7,7 @@ $tran_date="";
 $card_issuer="";
 $card_no="";
 $error="";
-$msg='<div class="alert alert-success">An SMS containing Username and password has been sent to your Phone Number. Please Save and use the password to log into your account.</div>';
+$msg='';
 $status="pending";
 $createPayment['bkashURL']="";
 $createPayment['message']="";
@@ -111,11 +111,11 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
                                  <?php 
                                  $status=$payment_row['status'];
                                  if($status=='Completed'){?>
+                                    <div class="alert alert-success">An SMS containing Username and password has been sent to your Phone Number. Please Save and use the password to log into your account.</div>
                                     <td><span class="badge status-completed"><?php echo $status?></span></td>
                                  <?php }else{?>
                                     <td><span class="badge status-due"><?php echo ucfirst($status)?></span></td>
                                  <?php }?>
-                                 <!-- <td><?php //echo $payment_row['statusMessage']?></td> -->
                                  <td><a href="pdfreports/invoice?invoice_id=<?php echo $payment_row['tran_id']?>" class="btn-style"><i class="feather-download"></i></a></td>
                               </tr>
                               <?php 
