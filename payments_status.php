@@ -16,6 +16,7 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
    $sql="select applicants.*,bkash_online_payment.bkash_payment_id from `applicants`,bkash_online_payment where bkash_online_payment.bkash_payment_id='$bkash_payment_id' and applicants.id=bkash_online_payment.user_id";
    $total_amount=round(intval(FORM_AMOUNT)*(1+SERVICE_CHARGE),2);
    $row=mysqli_fetch_assoc(mysqli_query($con,$sql));
+   $insert_id=$row['id'];
    $first_name=$row['first_name'];
    $last_name=$row['last_name'];
    $f_name=$row['fName'];
@@ -33,6 +34,7 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
    $bloodGroup=$row['bloodGroup'];
    $localGuardianName=$row['localGuardianName'];
    $localGuardianNid=$row['localGuardianNid'];
+   $password=$row['password'];
    $email=$row['email'];
    $image=$row['image'];
    $class=$row['class'];
@@ -43,18 +45,24 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
       }elseif($status=='failure'){
          $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "OTP not valid", "error")</script>';
       }elseif($status=='success'){
-         $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment completed", "success")</script>';
-      }elseif(isset($_GET['statusMessage'])){
-         $status="Duplicate transection";
-         $statusMessage=" Please try after sometime.";
-         $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($status).'", "'.$statusMessage.'", "error")</script>';
+         if(!isset($_SESSION['SMS_SENT'])){
+            $sms="Dear $first_name, Your password: $password  and Application ID: $insert_id";
+            $sms_status=send_sms_greenweb($phoneNumber,$sms);
+            if($sms_status=='sent'){
+               $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment completed", "success")</script>';   
+            }else{
+               $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "SMS sending error", "success")</script>';   
+            }
+            $_SESSION['SMS_SENT']=true;
+         }else{
+            $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment completed", "success")</script>';
+         }
+         // https://getadmittedonline.thewebdivers.com/payments_status?bkash_payment_id=TR00118Y1682419571979&status=Insufficient%20Funds&statusMessage=Insufficient%20Balance
       }elseif(isset($_GET['statusMessage']) && isset($_GET['status'])){
-         $status=$_GET['status'];
-         $statusMessage=$_GET['statusMessage'];
+         $status=urldecode($_GET['status']);
+         $statusMessage=urldecode($_GET['statusMessage']);
          $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($status).'", "'.$statusMessage.'", "error")</script>';
       }
-      // redirect("payments");
-
    }else{
       $_SESSION['TOASTR_MSG']=array(
          'type'=>'error',
@@ -110,7 +118,8 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
                                  <td><?php echo $payment_row['trxID']?></td>
                                  <?php 
                                  $status=$payment_row['status'];
-                                 if($status=='Completed'){?>
+                                 if($status=='Completed'){
+                                 ?>
                                     <div class="alert alert-success">An SMS containing Username and password has been sent to your Phone Number. Please Save and use the password to log into your account.</div>
                                     <td><span class="badge status-completed"><?php echo $status?></span></td>
                                  <?php }else{?>

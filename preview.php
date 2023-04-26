@@ -42,7 +42,7 @@ if(isset($_SESSION['NUMBER_VEFIED']) && $application_id!=""){
          'body'=>'You don\'t have the permission to access the location!',
          'title'=>'Error',
       );
-      // redirect("index");
+      redirect("index");
    }
 }else{
    $_SESSION['TOASTR_MSG']=array(
@@ -50,7 +50,7 @@ if(isset($_SESSION['NUMBER_VEFIED']) && $application_id!=""){
       'body'=>'You don\'t have the permission to access the location!',
       'title'=>'Error',
    );
-   // redirect("index");
+   redirect("index");
 }
 
 //Bkash Payment started
@@ -65,52 +65,48 @@ $msg="";
 $status="pending";
 $createPayment['bkashURL']="";
 $createPayment['message']="";
-$sql="select * from `applicants` where id='$application_id'";
 $total_amount=round(intval(FORM_AMOUNT)*(1+SERVICE_CHARGE),2);
-$row=mysqli_fetch_assoc(mysqli_query($con,$sql));
-if(isset($_GET['status'])){
-   $status=get_safe_value($_GET['status']);
-   if($status=='cancel'){
-      $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment has been cancelled by User.", "error")</script>';
-   }elseif($status=='failure'){
-      $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "OTP not valid", "error")</script>';
-   }elseif($status=='success'){
-      $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment completed", "success")</script>';
-   }elseif(isset($_GET['statusMessage'])){
-      $status="Duplicate transection";
-      $statusMessage=" Please try after sometime.";
-      $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($status).'", "'.$statusMessage.'", "error")</script>';
-   }elseif(isset($_GET['statusMessage']) && isset($_GET['status'])){
-      $status=$_GET['status'];
-      $statusMessage=$_GET['statusMessage'];
-      $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($status).'", "'.$statusMessage.'", "error")</script>';
-   }
-   // redirect("payments");
-}
-   if(isset($_POST['bkash'])){
-      $amount=round($total_amount,2);
-      $token=timeWiseTokenGeneartion();
-      $user_data=array(
-         'tran_id'=>uniqid("admission_"),
-         'amount'=>$amount,
-      );
-      if(isset($token['id_token'])){
-         $createPayment=createPayment($token['id_token'],$user_data);
-         if(isset($createPayment['message'])){
-            $msg= $createPayment['message'];
-         }
-         if(isset($createPayment['statusCode']) && $createPayment['statusCode']==000){
-            $statusMessage=$createPayment['statusMessage'];
-            $paymentID=$createPayment['paymentID'];
-            $amount=$createPayment['amount'];
-            $paymentCreateTime=$createPayment['paymentCreateTime'];
-            $merchantInvoiceNumber=$createPayment['merchantInvoiceNumber'];
-            $sql="INSERT INTO `bkash_online_payment` ( `tran_id`,`user_id`, `bkash_payment_id`,`customerMsisdn`,`trxID`,`amount`,`statusMessage`, `added_on`,`updated_on`,`status`) VALUES 
-                                          ( '$merchantInvoiceNumber', '$application_id','$paymentID',  '',   '', '$amount', '','$paymentCreateTime', '', 'pending')";
+if(isset($_POST['bkash'])){
+   $amount=round($total_amount,2);
+   $token=timeWiseTokenGeneartion();
+   $user_data=array(
+      'tran_id'=>uniqid("admission_"),
+      'amount'=>$amount,
+   );
+   if(isset($token['id_token'])){
+      $createPayment=createPayment($token['id_token'],$user_data);
+      if(isset($createPayment['message'])){
+         $msg= $createPayment['message'];
+      }
+      if(isset($createPayment['statusCode']) && $createPayment['statusCode']==000){
+         $statusMessage=$createPayment['statusMessage'];
+         $paymentID=$createPayment['paymentID'];
+         $amount=$createPayment['amount'];
+         $paymentCreateTime=$createPayment['paymentCreateTime'];
+         $merchantInvoiceNumber=$createPayment['merchantInvoiceNumber'];
+         $swl="select id from bkash_online_payment where user_id='$application_id' and status='pending'";
+         $res=mysqli_query($con,$swl);
+         if(mysqli_num_rows($res)>0){
+            $sql="update bkash_online_payment set tran_id='$merchantInvoiceNumber', bkash_payment_id='$paymentID', amount='$amount', added_on='$paymentCreateTime' where  user_id='$application_id' and status='pending'";
             if(mysqli_query($con,$sql)){
                redirect($createPayment['bkashURL']);
                die;
             }else{
+               echo $sql;
+               $_SESSION['TOASTR_MSG']=array(
+                  'type'=>'error',
+                  'body'=>'Something went wrong!',
+                  'title'=>'Error',
+               );
+            }
+         }else{
+            $sql="INSERT INTO `bkash_online_payment` ( `tran_id`,`user_id`, `bkash_payment_id`,`customerMsisdn`,`trxID`,`amount`,`statusMessage`, `added_on`,`updated_on`,`status`) VALUES 
+                           ( '$merchantInvoiceNumber', '$application_id','$paymentID',  '',   '', '$amount', '','$paymentCreateTime', '', 'pending')";
+            if(mysqli_query($con,$sql)){
+               redirect($createPayment['bkashURL']);
+               die;
+            }else{
+               echo $sql;
                $_SESSION['TOASTR_MSG']=array(
                   'type'=>'error',
                   'body'=>'Something went wrong!',
@@ -118,14 +114,15 @@ if(isset($_GET['status'])){
                );
             }
          }
-      }else{
-         $_SESSION['TOASTR_MSG']=array(
-            'type'=>'error',
-            'body'=>'Something went wrong!',
-            'title'=>'Error',
-         );
       }
+   }else{
+      $_SESSION['TOASTR_MSG']=array(
+         'type'=>'error',
+         'body'=>'Something went wrong!',
+         'title'=>'Error',
+      );
    }
+}
 ?>
 <div class="breadcrumb-bar">
    <div class="container">

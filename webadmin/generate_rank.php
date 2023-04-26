@@ -11,13 +11,13 @@ $msg="";
 // }
 // if(isset($_POST['submit'])){
    	// $password=get_safe_value($_POST['password']);
-   	$sql="SELECT mark.* ,sum(mark) as total, RANK() OVER(ORDER BY sum(mark) DESC,mark desc,id desc) as `rank` FROM mark group by exam_roll";
+   	echo $sql="SELECT mark.* ,sum(mark) as total, RANK() OVER(ORDER BY sum(mark) DESC,mark desc,id desc) as `rank` FROM mark group by exam_roll";
 	$res=mysqli_query($con,$sql);
     while($row=mysqli_fetch_assoc($res)){
         // pr($row);
         $rank=$row['rank'];
         $exam_roll=$row['exam_roll'];
-        $rank_sql="update applicants set merit='$rank' where examRoll='$exam_roll'";
+        echo $rank_sql="update applicants set merit='$rank' where examRoll='$exam_roll'";
         mysqli_query($con,$rank_sql);
     }
 // }

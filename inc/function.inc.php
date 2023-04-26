@@ -24,6 +24,34 @@ window.location.href = '<?php echo $link?>';
 	die();
 }
 
+
+function send_sms_greenweb($to,$sms){
+	$token="51391907191680700039a86d058a1a8adb800f05ca8c06b1fb1d";
+	$message = $sms;
+	$url = "http://api.greenweb.com.bd/api.php?json";
+	$data= array(
+		'to'=>"$to",
+		'message'=>"$message",
+		'token'=>"$token"
+		); 
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_URL,$url);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	curl_setopt($ch, CURLOPT_ENCODING, '');
+	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$smsresult = curl_exec($ch);
+	curl_close($ch);
+	$result=json_decode($smsresult,1);
+	if($result[0]['status']=="FAILED"){
+		$msg="not_sent";
+	}elseif($result[0]['status']=="SENT"){
+		$msg="sent";
+	}
+	return $msg;
+}
+
 function send_email($email,$html,$subject,$attachment=""){
 	$mail=new PHPMailer(true);
 	$mail->isSMTP();
@@ -463,7 +491,7 @@ function refreshToken($refresh_token){
 }
 
 function createPayment($id_token,$user_data){
-    $callbackURL=FRONT_SITE_PATH.'/executePayment.php';
+    $callbackURL=trim(FRONT_SITE_PATH.'executePayment.php');
     $requestbody = array(
         'mode' => '0011',
         'amount' => $user_data['amount'],

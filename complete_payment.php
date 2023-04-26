@@ -51,28 +51,6 @@
       }
    }
 //Bkash Payment started
-// $sql="select * from `applicants` where id='$application_id'";
-// $row=mysqli_fetch_assoc(mysqli_query($con,$sql));
-// if(isset($_GET['status'])){
-//    $status=get_safe_value($_GET['status']);
-//    if($status=='cancel'){
-//       $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment has been cancelled by User.", "error")</script>';
-//    }elseif($status=='failure'){
-//       $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "OTP not valid", "error")</script>';
-//    }elseif($status=='success'){
-//       $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment completed", "success")</script>';
-//    }elseif(isset($_GET['statusMessage'])){
-//       $status="Duplicate transection";
-//       $statusMessage=" Please try after sometime.";
-//       $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($status).'", "'.$statusMessage.'", "error")</script>';
-//    }elseif(isset($_GET['statusMessage']) && isset($_GET['status'])){
-//       $status=$_GET['status'];
-//       $statusMessage=$_GET['statusMessage'];
-//       $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($status).'", "'.$statusMessage.'", "error")</script>';
-//    }
-//    // redirect("payments");
-// }
-
 $total_amount=round(intval(FORM_AMOUNT)*(1+SERVICE_CHARGE),2);
 if(isset($_POST['bkash'])){
    $amount=round($total_amount,2);
@@ -93,28 +71,43 @@ if(isset($_POST['bkash'])){
          $paymentCreateTime=$createPayment['paymentCreateTime'];
          $merchantInvoiceNumber=$createPayment['merchantInvoiceNumber'];
          $application_id=ucfirst(get_safe_value($_POST['application_id']));
-         if(mysqli_num_rows(mysqli_query($con,"select id from bkash_online_payment where user_id='$application_id' and status='pending'"))>0){
-            $sql="update bkash_online_payment set tran_id='$merchantInvoiceNumber', bkash_payment_id='$paymentID', amount='$amount', added_on='$paymentCreateTime' where user_id='$application_id'";
-               if(mysqli_query($con,$sql)){
-               // echo $createPayment['bkashURL'];
+         $swl="select id from bkash_online_payment where user_id='$application_id' and status='pending'";
+         $res=mysqli_query($con,$swl);
+         if(mysqli_num_rows($res)>0){
+            $sql="update bkash_online_payment set tran_id='$merchantInvoiceNumber', bkash_payment_id='$paymentID', amount='$amount', added_on='$paymentCreateTime' where  user_id='$application_id' and status='pending'";
+            if(mysqli_query($con,$sql)){
                redirect($createPayment['bkashURL']);
                die;
             }else{
-               $msg="Something Went Wrong";
+               echo $sql;
+               $_SESSION['TOASTR_MSG']=array(
+                  'type'=>'error',
+                  'body'=>'Something went wrong!',
+                  'title'=>'Error',
+               );
             }
          }else{
             $sql="INSERT INTO `bkash_online_payment` ( `tran_id`,`user_id`, `bkash_payment_id`,`customerMsisdn`,`trxID`,`amount`,`statusMessage`, `added_on`,`updated_on`,`status`) VALUES 
-                        ('$merchantInvoiceNumber', '$application_id','$paymentID',  '',   '', '$amount', '','$paymentCreateTime', '', 'pending')";
-               if(mysqli_query($con,$sql)){
+                           ( '$merchantInvoiceNumber', '$application_id','$paymentID',  '',   '', '$amount', '','$paymentCreateTime', '', 'pending')";
+            if(mysqli_query($con,$sql)){
                redirect($createPayment['bkashURL']);
                die;
             }else{
-               $msg="Something Went Wrong";
+               echo $sql;
+               $_SESSION['TOASTR_MSG']=array(
+                  'type'=>'error',
+                  'body'=>'Something went wrong!',
+                  'title'=>'Error',
+               );
             }
          }
       }
    }else{
-      $msg="Something Went Wrong";
+      $_SESSION['TOASTR_MSG']=array(
+         'type'=>'error',
+         'body'=>'Something went wrong!',
+         'title'=>'Error',
+      );
    }
 }
 ?>

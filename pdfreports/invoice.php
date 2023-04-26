@@ -18,7 +18,7 @@ if(!isset($_GET['invoice_id']) || $_GET['invoice_id']==""){
             <td  align="center" colspan="2">
                 <strong><span style="font-size:25px">'.NAME.'</span></strong>
                 <br>
-                <span style="font-size:25px;text-align:left"><b>Sylhet Engineering College</b></span>
+                <span style="font-size:25px;text-align:left"><b>Engineering College</b></span>
             </td>
             <td align="center">                    
                 <img width="150" src="../assets/img/logo.svg" width="100" /> 

@@ -11,40 +11,36 @@ if(isset($_SESSION['APPLICANT_LOGIN'])){
     redirect('dashboard');
 }
 if(isset($_POST['submit'])){
-	$email=get_safe_value($_POST['email']);
+	$phone_number=get_safe_value($_POST['phone_number']);
    $password=get_safe_value($_POST['password']);
-   $sql="select * from applicants where email='$email'";
+   $sql="select * from applicants where phoneNumber='$phone_number' and binary password='$password'";
 	$res=mysqli_query($con,$sql);
 	if(mysqli_num_rows($res)>0){
 		$row=mysqli_fetch_assoc($res);
 		if($row['status']!=1){
          $_SESSION['TOASTR_MSG']=array(
             'type'=>'warning',
-            'body'=>'You haven\'t verified your email yet. Please verify the email',
-            'title'=>'Email Error',
+            'body'=>'You haven\'t verified your phone number yet. Please verify the phone number',
+            'title'=>'phone_number Error',
          );
          $class='class="alert alert-danger"'; 
-			$msg="You haven't verified your email yet. Please verify the email";
-		}else{
-            $verify=password_verify($password,$row['password']);
-            if($verify==1){
-               $msg="You are aleady registered. Please login";
-               $_SESSION['APPLICANT_LOGIN']="1";
-               $_SESSION['APPLICANT_ID']=$row['id'];
-               $_SESSION['EXAM_ROLL']=$row['examRoll'];
-               $_SESSION['IMAGE']=$row['image'];
-               $_SESSION['APPLICANT_NAME']=$row['first_name']." ".$row['last_name'];
-               // sendLoginEmail($row['email']);
-               redirect('dashboard');
-               die();
-            }else{
+			$msg="You haven't verified your phone number yet. Please verify the phone number";
+		}elseif($row['status']==1){
+         $_SESSION['APPLICANT_LOGIN']="1";
+         $_SESSION['APPLICANT_ID']=$row['id'];
+         $_SESSION['EXAM_ROLL']=$row['examRoll'];
+         $_SESSION['IMAGE']=$row['image'];
+         $_SESSION['APPLICANT_NAME']=$row['first_name']." ".$row['last_name'];
+         // sendLoginphone_number($row['phone_number']);
+         redirect('dashboard');
+         die();
+      }else{
                $_SESSION['TOASTR_MSG']=array(
                   'type'=>'error',
                   'body'=>'Please Enter correct Login details',
                   'title'=>'Error',
                );
-		         $msg="Please Enter correct Login details";
-            }
+		         $msg="Please Enter correct Login detailse";
 		}
       // echo $sql;
 	}else{
@@ -117,8 +113,8 @@ if(isset($_POST['submit'])){
                         <span <?php echo $class?> ><?php echo $msg?></span>
                         <form method="post">
                            <div class="form-group">
-                              <label class="form-control-label">Email</label>
-                              <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email address">
+                              <label class="form-control-label">Phone number</label>
+                              <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter your phone number">
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Password</label>

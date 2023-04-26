@@ -1,5 +1,9 @@
 <?php
    include("header.php");
+
+   if(isset($_SESSION['APPLICANT_LOGIN'])){
+      redirect('dashboard');
+   }
    $display="";
    $class="";
    $id="";
@@ -44,7 +48,8 @@
    	$class=get_safe_value($_POST['class']);
    	$dob=get_safe_value($_POST['dob']);
    	$quota=get_safe_value($_POST['quota']);
-      $password=password_hash($password,PASSWORD_DEFAULT);
+    //   $password=password_hash($password,PASSWORD_DEFAULT);
+    $password=rand(111111,999999);
    	$religion=get_safe_value($_POST['religion']);
       if(mysqli_num_rows(mysqli_query($con,"select id from applicants where phoneNumber='$phone_number'"))>0){
          $_SESSION['TOASTR_MSG']=array(
@@ -78,26 +83,36 @@
                         'title'=>'Error',
                      );
                   }else{
-                     $id=uniqid();
+                     $id="NPKKGS".substr(strtoupper(md5(uniqid())),0,4);;
                      $insert_id=$id;
                      $code=rand(111111,999999);
                      $image=time().'.jpg';
                      imagejpeg($img,UPLOAD_APPLICANT_IMAGE.$image,100);
                      $sql="INSERT INTO `applicants`(`id`, `first_name`,`last_name`,  `class_roll`, `roll`, `fName`, `mName`, `phoneNumber`, `presentAddress`, `permanentAddress`, `dob`, `gender`, `religion`, `birthId`, `quota`, `bloodGroup`, `examRoll`, `merit`, `localGuardianName`, `localGuardianNid`, `password`, `email`, `code`, `image`, `last_notification`,`class`,`fNid`,`mNid`,`final_submit`, `status`) 
                            VALUES ('$id','$first_name','$last_name','','$roll','$f_name','$m_name','$phone_number','$present_address','$permanent_address','$dob','$gender','$religion','$birthID','$quota','$blood_group','$roll','','$local_guardian_name','$local_guardian_nid','$password','$email','$code','$image','','$class','$f_nid','$m_nid','0','0')";
-                     // send_email($email,'Your account has been created. <a href="'.FRONT_SITE_PATH.'/verify?email='.$email.'&code='.md5($code).'">Verify Email</a>','Account Created');
                      if(mysqli_query($con,$sql)){
                         $_SESSION['TOASTR_MSG']=array(
                            'type'=>'success',
-                           'body'=>'An Email has been sent to your '.$email.' account. Please Verify your email & login.',
+                           'body'=>'An OTP has been sent to your '.$phone_number.'. Please Verify your Phone number & login.',
                            'title'=>'Success',
                         );
                         $otp=rand(1111,9999);
                         $_SESSION['MOBILE_OTP']=$otp;
                         $_SESSION['MOBILE_NUMBER']=$phone_number;
                         $_SESSION['APPLICATION_ID']=$insert_id;
+                        $sms="Dear $first_name, $otp is your OTP for your application. Application ID: $insert_id";
+                        $sms_status=send_sms_greenweb($phone_number,$sms);
+                        if($sms_status=='sent'){
+                           redirect("apply-otp-verification");
+                        }else{
+                           $_SESSION['TOASTR_MSG']=array(
+                              'type'=>'error',
+                              'body'=>'Sms Sending error!',
+                              'title'=>'Error',
+                           );
+                        }
                         // echo send_email($email,'Your otp is '. $otp,'Otp email');
-                        redirect("apply-otp-verification");
+                        // redirect("apply-otp-verification");
                      }else{
                         echo $sql;
                         $_SESSION['TOASTR_MSG']=array(
@@ -203,8 +218,8 @@
                                  <div class="form-group">
                                     <label class="form-control-label">Phone Number <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                       <span class="input-group-text" id="verifyEmailOTP" onclick="verifyEmailOTP()" >+88</span>
-                                       <input required type="text" autocomplete="off" pattern="^(?:(?:\+|00)88|01)?(?:\d{11}|\d{13})$" title="Please enter correct format and length. ex: 017xxxxxx" name="phone_number"  value="<?php echo $phone_number?>" id="phone_number" class="form-control" placeholder="Phone Number ex: 017xxxx">
+                                       <span class="input-group-text" id="verifyEmailOTP"  >+88</span>
+                                       <input required type="text" autocomplete="off" pattern="^(?:(?:\+|00)88|01)?(?:\d{11}|\d{13})$" title="Please enter correct format and length. ex: 017xxxxxx" name="phone_number"  value="<?php echo $phone_number?>" id="phone_number" class="form-control" placeholder="Applicant's Phone Number ex: 017xxxx">
                                     </div>
                                  </div>
                               </div>
@@ -314,7 +329,7 @@
                               </div>
                            <div class="col-lg-6">
                               <div class="form-group">
-                                 <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                 <label class="form-label">Religion <span class="text-danger">*</span></label>
                                  <select class="form-select select" name="religion" id="religion" required>
                                     <option selected disabled>Select Religion</option>
                                     <?php
@@ -470,17 +485,19 @@
                            <div>
                               <table class="table table-bordered" style="width:40%;margin:0 auto;">
                               <tr>
-                                    <td colspan="3" style="width:10%;">
+                                    <td style="width:10%;">
                                        <img src="<?php echo FRONT_SITE_PATH?>/webadmin/ajax/captcha_gen.php?captchaCode=<?php 
                                                       $random_alpha = md5(rand()); //generation of random string
                                                       /** Genrate a captcha of length 6 */
                                                       $captcha_code = substr($random_alpha, 0, 6);
                                                       echo $captcha_code;?>" id="captcha"/>
                                     </td>
-                                    <td colspan="3" style="width:10%;">
+                                    <td  style="width:10%;">
                                        <span class="btn btn-primary" id="refreshCaptcha">Refresh</span>
                                     </td>
-                                    <td colspan="3" style="width:30%;">
+                                 </tr>
+                                 <tr>
+                                    <td colspan="2" style="width:100%;">
                                        <input type="text" required name="captcha_code" placeholder="Enter Captcha Code" class="form-control" autocomplete="off"/>
                                     </td>
                                  </tr>
@@ -521,9 +538,22 @@
 </form>
 <?php include("footer.php");?>
 <script>
+
+function generateString(length) {
+
+
+   return result;
+}
 $('#refreshCaptcha').on({'click': function(){
-      var captchaCode=(generateString(6));
-      $('#captcha').attr('src','<?php echo FRONT_SITE_PATH?>/webadmin/ajax/captcha_gen.php?captchaCode='+captchaCode);
+   var characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   let result = '';
+   const charactersLength = characters.length;
+   
+   for(let i = 0; i <=6 ; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   var captchaCode=result;
+   $('#captcha').attr('src','<?php echo FRONT_SITE_PATH?>/webadmin/ajax/captcha_gen.php?captchaCode='+captchaCode);
    }
 });
 var filename=jQuery("#image").val();

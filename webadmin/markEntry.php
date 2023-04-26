@@ -71,12 +71,12 @@
                $meal_sql="select `mark` from `mark` where `exam_roll`='$roll' and `exam_id`='$exam_id' and `sub_id`='$subject'";
                $meal_res=mysqli_query($con,$meal_sql);
                if(mysqli_num_rows($meal_res)>0){
-                  echo $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
+                  $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
                   if(mysqli_query($con,$swl)){
                      // echo "Updated1";
                   }
                }else{
-                  echo $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
+                  $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
                                                       ( '$subject', '$roll', '$class_id', '$mark','$exam_id','$time','','$year', '1')";
                   if(mysqli_query($con,$swl)){
                      // echo "Updated1";
@@ -85,6 +85,7 @@
             }
          }
          $_SESSION['UPDATE']=1;
+         redirect("markEntry");
       }else{
          //insert
          $roll_count=count($_POST['roll'])-1;

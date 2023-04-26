@@ -29,15 +29,15 @@ $batch='';
 $deptId="";
 if(isset($_GET['id']) && $_GET['id']!=""){
 	$id=get_safe_value($_GET['id']);
-    $res=mysqli_query($con,"select * from users where md5(id)='$id'");
+    $res=mysqli_query($con,"select * from applicants where md5(id)='$id'");
 	if(mysqli_num_rows($res)>0){
         $row=mysqli_fetch_assoc($res);
-        $name=$row['name'];
-        $class_roll=$row['class_roll'];
-        $fname=$row['fName'];
-        $fOccupation=$row['fOccupation'];
-        $mname=$row['mName'];
-        $mOccupation=$row['mOccupation'];
+        $first_name=$row['first_name'];
+        $last_name=$row['last_name'];
+        $f_name=$row['fName'];
+        $fNid=$row['fNid'];
+        $m_name=$row['mName'];
+        $mNid=$row['mNid'];
         $phoneNumber=$row['phoneNumber'];
         $presentAddress=$row['presentAddress'];
         $permanentAddress=$row['permanentAddress'];
@@ -45,22 +45,21 @@ if(isset($_GET['id']) && $_GET['id']!=""){
         $gender=$row['gender'];
         $religion=$row['religion'];
         $birthId=$row['birthId'];
-        $ffQuata=$row['ffQuata'];
+        $quota=$row['quota'];
         $bloodGroup=$row['bloodGroup'];
-        $merit=$row['merit'];
-        $block=$row['block'];
-        $legalGuardianName=$row['legalGuardianName'];
-        $legalGuardianRelation=$row['legalGuardianRelation'];
-        $image=$row['image'];
+        $localGuardianName=$row['localGuardianName'];
+        $localGuardianNid=$row['localGuardianNid'];
         $email=$row['email'];
-        $dept_id=$row['dept_id'];
-        $room_number=$row['room_number'];
-        $examRoll=$row['examRoll'];
-        $batch=$row['batch'];
+        $image=$row['image'];
+        $class=$row['class'];
         $required='';
     }else{
-        $_SESSION['PERMISSION_ERROR']=1;
-        redirect('index.php');
+        $_SESSION['TOASTR_MSG']=array(
+           'type'=>'error',
+           'body'=>'You don\'t have the permission to access that location!',
+           'title'=>'Error',
+        );
+        // redirect('index.php');
     }
 }
 if(isset($_POST['submit'])){
@@ -198,19 +197,24 @@ if(isset($_POST['submit'])){
             <form class="new-added-form" id="validate" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Student's Name *</label>
-                        <input class="form-control" placeholder="Student's Name" name="name" id="name" type="text"
-                            value="<?php echo $name?>" required>
+                        <label>First Name *</label>
+                        <input class="form-control" placeholder="First Name" name="name" id="name" type="text"
+                            value="<?php echo $first_name?>" required>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Student's ID *</label>
+                        <label>Last Name *</label>
+                        <input class="form-control" placeholder="Last Name" name="name" id="name" type="text"
+                            value="<?php echo $last_name?>" required>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12 form-group">
+                        <label>Exam Roll *</label>
                         <input class="form-control" placeholder="Student's ID" name="roll" id="roll" type="number"
-                            value="<?php echo $class_roll?>" required>
+                            value="<?php echo $roll?>" required>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Father's Name *</label>
                         <input class="form-control" placeholder="Father's Name" autocomplete="off" name="fName"
-                            value="<?php echo $fname?>" id="fName" type="text" required>
+                            value="<?php echo $f_name?>" id="fName" type="text" required>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Father's Occupation *</label>
@@ -220,7 +224,7 @@ if(isset($_POST['submit'])){
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Mother's Name *</label>
                         <input class="form-control" placeholder="Mother's Name" autocomplete="off" name="mName"
-                            type="text" required value="<?php echo $mname?>">
+                            type="text" required value="<?php echo $m_name?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Mother's Occupation *</label>
@@ -242,25 +246,6 @@ if(isset($_POST['submit'])){
                         <input class="form-control" placeholder="Present Address" autocomplete="off"
                             name="presentAddress" type="text" required value="<?php echo $presentAddress?>">
                     </div>
-                    <!-- <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>district *</label>
-                        <select class="select2" name="district" required>
-                            <option>Please Select district </option>
-                            <?php //echo "<pre>";
-                                // $data=file_get_contents("./inc/district.json");
-                                // $result= json_decode($data,1);
-                                // // print_r($result['districts']);
-                                // $count=count($result['districts']);
-                                // for($i=0;$i<$count;$i++){
-                                //     if(($result['districts'][$i]['name'])==$homeDistrict){
-                                //         echo "<option selected='selected' value=".$result['districts'][$i]['name'].">".$result['districts'][$i]['name']."</option>";
-                                //     }else{
-                                //         echo "<option value=".$result['districts'][$i]['name'].">".$result['districts'][$i]['name']."</option>";
-                                //     } 
-                                // }
-                                ?>
-                        </select>
-                    </div> -->
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Permanent Address *</label>
                         <input class="form-control" placeholder="Permanent Address" autocomplete="off"
@@ -277,47 +262,6 @@ if(isset($_POST['submit'])){
                             name="birthId" type="number" required value="<?php echo $birthId?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Block *</label>
-                        <select class="select2" name="block" required>
-                            <option>Please Select block </option>
-                            <?php
-                        $data=[
-                                'name'=>[
-                                    'A',
-                                    'B',
-                                ]
-                            ];
-                            $count=count($data['name']);
-                            for($i=0;$i<$count;$i++){
-                                if($data['name'][$i]==$block){
-                                    echo "<option selected='selected' value=".$data['name'][$i].">".$data['name'][$i]."</option>";
-                                }else{
-                                    echo "<option value=".$data['name'][$i].">".$data['name'][$i]."</option>";
-                                }                                                        
-                            }
-                        ?>
-                        </select>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Room Number *</label>
-                        <select class="select2" name="room_number" required>
-                            <option>Please Select Room Number </option>
-                            <?php 
-                                $data=file_get_contents("inc/rooms.json");
-                                $result= json_decode($data,1);
-                                print_r($result['number'][0]);
-                                $count=count($result['number']);
-                                for($i=0;$i<$count;$i++){
-                                    if(($result['number'][$i])==$room_number){
-                                        echo "<option selected='selected' value=".$result['number'][$i].">".$result['number'][$i]."</option>";
-                                    }else{
-                                        echo "<option value=".$result['number'][$i].">".$result['number'][$i]."</option>";
-                                    } 
-                                }
-                                ?>
-                        </select>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Gender *</label>
                         <select class="select2" name="gender" required>
                             <option>Please Select Gender </option>
@@ -325,6 +269,8 @@ if(isset($_POST['submit'])){
                         $data=[
                                 'name'=>[
                                     'Male',
+                                    'Female',
+                                    'Other',
                                 ]
                             ];
                             $count=count($data['name']);
@@ -392,29 +338,13 @@ if(isset($_POST['submit'])){
                         </select>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Dept *</label>
-                        <select class="form-control select2" name="dept_id">
-                            <option>Select Department</option>
+                        <label>Class *</label>
+                        <select class="form-control select2" name="class">
+                            <option>Select Class</option>
                             <?php
-                            $res=mysqli_query($con,"SELECT * FROM `depts` where status='1'");
+                            $res=mysqli_query($con,"SELECT * FROM `class` where status='1'");
                             while($row=mysqli_fetch_assoc($res)){
-                                if($row['id']==$dept_id){
-                                    echo "<option selected='selected' value=".$row['id'].">".$row['name']."</option>";
-                                }else{
-                                    echo "<option value=".$row['id'].">".$row['name']."</option>";
-                                }                                                        
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Batch *</label>
-                        <select class="form-control select2" name="batch">
-                            <option>Select Batch</option>
-                            <?php
-                            $res=mysqli_query($con,"SELECT * FROM `batch` where status='1'");
-                            while($row=mysqli_fetch_assoc($res)){
-                                if($row['id']==$batch){
+                                if($row['id']==$class){
                                     echo "<option selected='selected' value=".$row['id'].">".$row['name']."</option>";
                                 }else{
                                     echo "<option value=".$row['id'].">".$row['name']."</option>";
@@ -425,20 +355,18 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label> Quota *</label>
-                        <select class="select2" name="ffQuata" required>
-                            <option>Please Select ffQuota </option>
+                        <select class="select2" name="quota" required>
+                            <option>Please Select Quota </option>
                             <?php
                             $data=[
                                 'name'=>[
                                     'N/A',
                                     'FF',
-                                    'TR',
-                                    'DI',
                                 ]
                             ];
                             $count=count($data['name']);
                             for($i=0;$i<$count;$i++){
-                                if($data['name'][$i]==$ffQuata){
+                                if($data['name'][$i]==$quota){
                                     echo "<option selected='selected' value=".$data['name'][$i].">".$data['name'][$i]."</option>";
                                 }else{
                                     echo "<option value=".$data['name'][$i].">".$data['name'][$i]."</option>";
@@ -446,11 +374,6 @@ if(isset($_POST['submit'])){
                             }                                       
                         ?>
                         </select>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Exam Roll</label>
-                        <input class="form-control" placeholder="Last Exam roll" autocomplete="off" name="examRoll"
-                            type="text" required value="<?php echo $examRoll?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Merit</label>
