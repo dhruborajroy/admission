@@ -1,99 +1,96 @@
 <?php 
 include('header.php');
-$msg="";
 $id="";
-$name='';
-$fname='';
-$fOccupation='';
-$mname='';
-$mOccupation='';
-$phoneNumber='';
-$presentAddress='';
-$permanentAddress='';
+$msg="";
+$first_name="s";
+$last_name="s";
+$f_name="s";
+$f_nid="24";
+$roll="";
+$m_name="34";
+$m_nid="234";
+$phone_number="2343".rand(22,2322);
+$present_address="234";
+$permanent_address="234";
+$dob="30/11/2002";
+$gender="Male";
+$religion="Hinduism";
+$birth_Id="234342";
+$quota="N/A";
+$bloodGroup="A+";
+$local_guardian_name="Dhrubo";
+$local_guardian_nid="34".rand(22,2322);
+$email="ksdn@ldmv.csk".rand(22,2322);
+$image="";
+$class="1";
+$fOccupation="1";
 $required='required';
-$paymentStatus='';
-$dob='';
-$gender='';
-$religion='';
-$birthId='';
-$bloodGroup='';
-$examRoll='';
-$legalGuardianName='';
-$legalGuardianRelation='';
-$image='';
-$email='';
-$merit='';
-$block='';
-$room_number='';
-$batch='';
-$deptId="";
+$readonly="";
 if(isset($_GET['id']) && $_GET['id']!=""){
 	$id=get_safe_value($_GET['id']);
-    $res=mysqli_query($con,"select * from applicants where md5(id)='$id'");
+    $res=mysqli_query($con,"select * from applicants where id='$id'");
 	if(mysqli_num_rows($res)>0){
         $row=mysqli_fetch_assoc($res);
         $first_name=$row['first_name'];
         $last_name=$row['last_name'];
+        $roll=$row['roll'];
         $f_name=$row['fName'];
-        $fNid=$row['fNid'];
+        $f_nid=$row['fNid'];
         $m_name=$row['mName'];
-        $mNid=$row['mNid'];
-        $phoneNumber=$row['phoneNumber'];
-        $presentAddress=$row['presentAddress'];
-        $permanentAddress=$row['permanentAddress'];
+        $m_nid=$row['mNid'];
+        $phone_number=$row['phoneNumber'];
+        $present_address=$row['presentAddress'];
+        $permanent_address=$row['permanentAddress'];
         $dob=$row['dob'];
         $gender=$row['gender'];
         $religion=$row['religion'];
-        $birthId=$row['birthId'];
+        $birth_Id=$row['birthId'];
         $quota=$row['quota'];
         $bloodGroup=$row['bloodGroup'];
-        $localGuardianName=$row['localGuardianName'];
-        $localGuardianNid=$row['localGuardianNid'];
+        $local_guardian_name=$row['localGuardianName'];
+        $local_guardian_nid=$row['localGuardianNid'];
         $email=$row['email'];
         $image=$row['image'];
         $class=$row['class'];
         $required='';
+        $readonly="disabled";
     }else{
         $_SESSION['TOASTR_MSG']=array(
            'type'=>'error',
            'body'=>'You don\'t have the permission to access that location!',
            'title'=>'Error',
         );
-        // redirect('index.php');
+        redirect('index.php');
     }
 }
 if(isset($_POST['submit'])){
-	$name=ucfirst(get_safe_value($_POST['name']));
-	$class_roll=get_safe_value($_POST['roll']);
-	$fName=ucfirst(get_safe_value($_POST['fName']));
-	$fOccupation=get_safe_value($_POST['fOccupation']);
-	$mName=ucfirst(get_safe_value($_POST['mName']));
-	$mOccupation=get_safe_value($_POST['mOccupation']);
-	$phoneNumber=get_safe_value($_POST['phoneNumber']);
-	$presentAddress=get_safe_value($_POST['presentAddress']);
-	$permanentAddress=get_safe_value($_POST['permanentAddress']);
-	$dob=get_safe_value($_POST['dob']);
-	$gender=get_safe_value($_POST['gender']);
-	$religion=get_safe_value($_POST['religion']);
-	$birthId=get_safe_value($_POST['birthId']);
-	$bloodGroup=get_safe_value($_POST['bloodGroup']);
-	$examRoll=get_safe_value($_POST['examRoll']);
-	$merit=get_safe_value($_POST['merit']);
-	$room_number=get_safe_value($_POST['room_number']);
-	$block=get_safe_value($_POST['block']);
-	$legalGuardianName=get_safe_value($_POST['legalGuardianName']);
-	$legalGuardianRelation=get_safe_value($_POST['legalGuardianRelation']);
-	$email=get_safe_value($_POST['email']);
-    $ffQuata=get_safe_value($_POST['ffQuata']);
-    $dept_id=get_safe_value($_POST['dept_id']);
-    $batch=get_safe_value($_POST['batch']);
+    $first_name=ucfirst(get_safe_value($_POST['first_name']));
+    $last_name=ucfirst(get_safe_value($_POST['last_name']));
+    $f_name=ucfirst(get_safe_value($_POST['f_name']));
+    $f_nid=ucfirst(get_safe_value($_POST['f_nid']));
+    $m_name=ucfirst(get_safe_value($_POST['m_name']));
+    $m_nid=ucfirst(get_safe_value($_POST['m_nid']));
+    if($readonly!=="disabled"){
+        $phone_number=get_safe_value($_POST['phone_number']);
+        $email=get_safe_value($_POST['email']);
+        $gender=get_safe_value($_POST['gender']);
+        $birth_Id=get_safe_value($_POST['birth_Id']);
+        $class=get_safe_value($_POST['class']);
+        $dob=get_safe_value($_POST['dob']);
+        $quota=get_safe_value($_POST['quota']);
+        $blood_group=get_safe_value($_POST['blood_group']);
+    }
+    $present_address=get_safe_value($_POST['present_address']);
+    $permanent_address=get_safe_value($_POST['permanent_address']);
+    $local_guardian_name=get_safe_value($_POST['local_guardian_name']);
+    $local_guardian_nid=get_safe_value($_POST['local_guardian_nid']);
     $time=time();
-    if(mysqli_num_rows(mysqli_query($con,"select id from users where phoneNumber='$phoneNumber'"))){
-        $msg="Phone number is already added";
-    }elseif(mysqli_num_rows(mysqli_query($con,"select id from users where email='$email'"))){
-        $msg="Email is already added";
-    }else{
-        if($id==''){
+    if($id==''){
+        if(mysqli_num_rows(mysqli_query($con,"select id from applicants where phoneNumber='$phone_number'"))){
+            $msg="Phone number is already added";
+        }elseif(mysqli_num_rows(mysqli_query($con,"select id from applicants where email='$email'"))){
+            $msg="Email is already added";
+        }else{
             $info=getimagesize($_FILES['image']['tmp_name']);
             $width = $info[0];
             $height = $info[1];
@@ -103,71 +100,124 @@ if(isset($_POST['submit'])){
                 }elseif($info['mime']=="image/png"){
                     $img=imagecreatefrompng($_FILES['image']['tmp_name']);
                 }else{
-                    $msg= "Only select jpg or png image";
+                    $_SESSION['TOASTR_MSG']=array(
+                       'type'=>'error',
+                       'body'=>'Only select jpg or png image',
+                       'title'=>'Error',
+                    );
                 }
                 if(isset($img)){
-                    // if ($width > "300" || $height > "200"){
-                    //     echo "Image dimension should be within 300X200";
-                    // }
-                    // else
                     if (($_FILES["image"]["size"] > 300000)) {//2000000 = 2Mb
-                        $msg= "Image size exceeds 300 kb";
+                        $_SESSION['TOASTR_MSG']=array(
+                           'type'=>'error',
+                           'body'=>'Image size exceeds 300 kb',
+                           'title'=>'Error',
+                        );
                     }else{
+                        $id=PREFIX.substr(strtoupper(md5(uniqid())),0,4);
                         $roll=date('y').rand(1111,9999);
-                        $password=password_hash("12345678",PASSWORD_DEFAULT);
-                        $image=time().'.jpg';
-                        move_uploaded_file($_FILES['image']['tmp_name'],UPLOAD_STUDENT_IMAGE.$image);
-                        $sql="INSERT INTO `users` (`name`, `roll`, `class_roll`,`fName`, `fOccupation`, `mName`, `mOccupation`, `phoneNumber`, `presentAddress`, `permanentAddress`, `dob`, `gender`, `religion`, `birthId`,`ffQuata`, `bloodGroup`,  `examRoll`, `merit`,`block`,`room_number`, `legalGuardianName`, `legalGuardianRelation`, `image`,`email`,`dept_id`,`batch`,`password`, `last_notification`,`meal_status`,`full_month_on`,`guest_meal`,`meal_request_status`,`meal_request_pending`,`guest_meal_request_status`,`guest_meal_request_pending`,`role`,`status`)
-                                                VALUES ( '$name', '$roll','$class_roll','$fName', '$fOccupation', '$mName', '$mOccupation', '$phoneNumber','$presentAddress','$permanentAddress','$dob','$gender','$religion','$birthId','$ffQuata','$bloodGroup','$examRoll','$merit','$block', '$room_number','$legalGuardianName','$legalGuardianRelation','$image','$email','$dept_id','$batch','$password','$time',0,1, 0,0,0,0,0,1, 1)";
-                        send_email($email,"Your account has been created. Your password is <b>12345678 </b>. Please login and change your password <br> http://localhost/hall/students/ ","Account Created");
-                        mysqli_query($con,$sql);
-                        $_SESSION['INSERT']=1;
-                        redirect("users.php");
+                        $password=rand(111111,999999);
+                        $image=$id."_".time().'.jpg';
+                        imagejpeg($img,UPLOAD_APPLICANT_IMAGE.$image);
+                        $code='';
+                        $sql="INSERT INTO `applicants`(`id`, `first_name`,`last_name`,   `roll`, `fName`, `mName`, `phoneNumber`, `presentAddress`, `permanentAddress`, `dob`, `gender`, `religion`, `birthId`, `quota`, `bloodGroup`, `examRoll`, `merit`, `localGuardianName`, `localGuardianNid`, `password`, `email`, `code`, `image`, `last_notification`,`class`,`fNid`,`mNid`,`final_submit`, `status`) 
+                        VALUES ('$id','$first_name','$last_name','$roll','$f_name','$m_name','$phone_number','$present_address','$permanent_address','$dob','$gender','$religion','$birth_Id','$quota','$blood_group','$roll','','$local_guardian_name','$local_guardian_nid','$password','$email','$code','$image','','$class','$f_nid','$m_nid','0','0')";
+                        if(mysqli_query($con,$sql)){
+                            $_SESSION['TOASTR_MSG']=array(
+                               'type'=>'success',
+                               'body'=>'Applicants ',
+                               'title'=>'Error',
+                            );
+                            redirect("applicants");
+                        }else{
+                            $_SESSION['TOASTR_MSG']=array(
+                               'type'=>'error',
+                               'body'=>'SQL Error',
+                               'title'=>'Error',
+                            );
+                            echo $sql;
+                        }
                     }
                 }
             }else{
-                $msg= "Only select jpg or png image";
+                $_SESSION['TOASTR_MSG']=array(
+                   'type'=>'error',
+                   'body'=>'Only select jpg or png image',
+                   'title'=>'Error',
+                );
+            }
+        }
+    }else{
+        if($_FILES['image']['name']!=''){
+            $info=getimagesize($_FILES['image']['tmp_name']);
+            // $width = $info[0];
+            // $height = $info[1];
+            if(isset($info['mime'])){
+                if($info['mime']=="image/jpeg"){
+                    $img=imagecreatefromjpeg($_FILES['image']['tmp_name']);
+                }elseif($info['mime']=="image/png"){
+                    $img=imagecreatefrompng($_FILES['image']['tmp_name']);
+                }else{
+                    $_SESSION['TOASTR_MSG']=array(
+                       'type'=>'error',
+                       'body'=>'Only select jpg or png image',
+                       'title'=>'Error',
+                    );
+                }
+                if(isset($img)){
+                    if (($_FILES["image"]["size"] > 300000)) {//2000000 = 2Mb
+                        $_SESSION['TOASTR_MSG']=array(
+                           'type'=>'error',
+                           'body'=>'Image size exceeds 200 kb',
+                           'title'=>'Error',
+                        );
+                    }else{
+                        $image=$id."_".time().'.jpg';
+                        imagejpeg($img,UPLOAD_APPLICANT_IMAGE.$image);
+                        // echo $sql="update `applicants` set  `first_name`='$first_name', `last_name`='$last_name', `class`='$class',`fName`='$f_name',`fNid`='$f_nid',`mName`='$m_name',`mNid`='$m_nid',`phoneNumber`='$phone_number',`presentAddress`='$present_address',`permanentAddress`='$permanent_address',`dob`='$dob',`gender`='$gender',`religion`='$religion',`birthId`='$birth_Id',`quota`='$quota',`bloodGroup`='$blood_group',`image`='$image', `email`='$email' where md5(id)='$id'";
+                        $sql="update `applicants` set  `first_name`='$first_name', `last_name`='$last_name', `fName`='$f_name',`fNid`='$f_nid',`mName`='$m_name',`mNid`='$m_nid',`presentAddress`='$present_address',`permanentAddress`='$permanent_address',`image`='$image' where md5(id)='$id'";
+                        if(mysqli_query($con,$sql)){
+                            $_SESSION['TOASTR_MSG']=array(
+                               'type'=>'success',
+                               'body'=>'Applicants Data updated Successfully',
+                               'title'=>'Error',
+                            );
+                            redirect("applicants");
+                        }else{
+                            $_SESSION['TOASTR_MSG']=array(
+                               'type'=>'error',
+                               'body'=>'SQL Error',
+                               'title'=>'Error',
+                            );
+                            echo $sql;
+                        }
+                    }
+                }
+            }else{
+                $_SESSION['TOASTR_MSG']=array(
+                   'type'=>'error',
+                   'body'=>'Only select jpg or png image',
+                   'title'=>'Error',
+                );
             }
         }else{
-                if($_FILES['image']['name']!=''){
-                    $info=getimagesize($_FILES['image']['tmp_name']);
-                    // $width = $info[0];
-                    // $height = $info[1];
-                    if(isset($info['mime'])){
-                        if($info['mime']=="image/jpeg"){
-                            $img=imagecreatefromjpeg($_FILES['image']['tmp_name']);
-                        }elseif($info['mime']=="image/png"){
-                            $img=imagecreatefrompng($_FILES['image']['tmp_name']);
-                        }else{
-                            $msg= "Only select jpg or png image";
-                        }
-                        if(isset($img)){
-                            // if ($width > "300" || $height > "200"){
-                            //     echo "Image dimension should be within 300X200";
-                            // }
-                            // else
-                            if (($_FILES["image"]["size"] > 300000)) {//2000000 = 2Mb
-                                $msg= "Image size exceeds 200 kb";
-                            }else{
-                                $image=time().'.jpg';
-                                // $image=imagejpeg($img,$image,40);
-                                move_uploaded_file($_FILES['image']['tmp_name'],UPLOAD_STUDENT_IMAGE.$image);
-                                $sql="update `users` set  `name`='$name',`class_roll`='$class_roll', `fName`='$fName',`fOccupation`='$fOccupation',`mName`='$mName',`mOccupation`='$mOccupation',`phoneNumber`='$phoneNumber',`permanentAddress`='$permanentAddress',`dob`='$dob',`gender`='$gender',`religion`='$religion',`batch`='$batch',`birthId`='$birthId',`ffQuata`='$ffQuata',`bloodGroup`='$bloodGroup',`examRoll`='$examRoll',`merit`='$merit',`legalGuardianName`='$legalGuardianName',`legalGuardianRelation`='$legalGuardianRelation',`image`='$image', `email`='$email', `dept_id`='$dept_id', `room_number`='$room_number', `block`='$block',`meal_request_status`='0'  where md5(id)='$id'";
-                                mysqli_query($con,$sql);
-                                $_SESSION['UPDATE']=1;
-                                redirect("users.php");
-                            }
-                        }
-                    }else{
-                        $msg= "Only select jpg or png image";
-                    }
-                }else{
-                    $sql="update `users` set  `name`='$name', `class_roll`='$class_roll',`fName`='$fName',`fOccupation`='$fOccupation',`mName`='$mName',`mOccupation`='$mOccupation',`phoneNumber`='$phoneNumber',`permanentAddress`='$permanentAddress',`dob`='$dob',`gender`='$gender',`religion`='$religion',`batch`='$batch',`birthId`='$birthId',`ffQuata`='$ffQuata',`bloodGroup`='$bloodGroup',`examRoll`='$examRoll',`merit`='$merit',`legalGuardianName`='$legalGuardianName',`legalGuardianRelation`='$legalGuardianRelation',`image`='$image', `email`='$email' , `dept_id`='$dept_id' ,`meal_request_status`='0', `room_number`='$room_number', `block`='$block' where  md5(id)='$id'";
-                    mysqli_query($con,$sql);
-                    $_SESSION['UPDATE']=1;
-                    // redirect("users.php");
-                }
+            $sql="update `applicants` set  `first_name`='$first_name', `last_name`='$last_name', `fName`='$f_name',`fNid`='$f_nid',`mName`='$m_name',`mNid`='$m_nid',`presentAddress`='$present_address',`permanentAddress`='$permanent_address',`image`='$image' where md5(id)='$id'";
+            if(mysqli_query($con,$sql)){
+                $_SESSION['TOASTR_MSG']=array(
+                   'type'=>'success',
+                   'body'=>'Applicants Data updated Successfully',
+                   'title'=>'Error',
+                );
+                redirect("applicants");
+            }else{
+                $_SESSION['TOASTR_MSG']=array(
+                   'type'=>'error',
+                   'body'=>'SQL Error',
+                   'title'=>'Error',
+                );
+                echo $sql;
             }
+        }
     }
 }
 ?>
@@ -198,72 +248,74 @@ if(isset($_POST['submit'])){
                 <div class="row">
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>First Name *</label>
-                        <input class="form-control" placeholder="First Name" name="name" id="name" type="text"
+                        <input class="form-control" placeholder="First Name" name="first_name" id="first_name" type="text"
                             value="<?php echo $first_name?>" required>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Last Name *</label>
-                        <input class="form-control" placeholder="Last Name" name="name" id="name" type="text"
+                        <input class="form-control" placeholder="Last Name" name="last_name" id="last_name" type="text"
                             value="<?php echo $last_name?>" required>
                     </div>
+                    <?php if($readonly!=""){?>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Exam Roll *</label>
-                        <input class="form-control" placeholder="Student's ID" name="roll" id="roll" type="number"
+                        <input <?php echo $readonly?> class="form-control" placeholder="Student's ID" name="roll" id="roll" type="number"
                             value="<?php echo $roll?>" required>
                     </div>
+                    <?php }?>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Father's Name *</label>
-                        <input class="form-control" placeholder="Father's Name" autocomplete="off" name="fName"
-                            value="<?php echo $f_name?>" id="fName" type="text" required>
+                        <input class="form-control" placeholder="Father's Name" autocomplete="off" name="f_name"
+                            value="<?php echo $f_name?>" id="f_name" type="text" required>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Father's Occupation *</label>
-                        <input class="form-control" placeholder="Father's Occupation" autocomplete="off"
-                            name="fOccupation" value="<?php echo $fOccupation?>" type="text" required id="fOccupation">
+                        <label>Father's NID *</label>
+                        <input class="form-control" placeholder="Father's NID" autocomplete="off"
+                            name="f_nid" value="<?php echo $f_nid?>" type="text" required id="f_nid">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Mother's Name *</label>
-                        <input class="form-control" placeholder="Mother's Name" autocomplete="off" name="mName"
+                        <input class="form-control" placeholder="Mother's Name" autocomplete="off" name="m_name"
                             type="text" required value="<?php echo $m_name?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Mother's Occupation *</label>
-                        <input class="form-control" placeholder="Mother's Occupation" autocomplete="off"
-                            name="mOccupation" type="text" required value="<?php echo $mOccupation?>">
+                        <label>Mother's NID *</label>
+                        <input class="form-control" placeholder="Father's NID" autocomplete="off"
+                            name="m_nid" value="<?php echo $m_nid?>" type="text" required id="m_nid">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Phone Number *</label>
-                        <input class="form-control"  placeholder="Phone Number" autocomplete="off" name="phoneNumber"
-                            type="tel" required value="<?php echo $phoneNumber?>">
+                        <input <?php echo $readonly?> class="form-control"  placeholder="Phone Number" autocomplete="off" name="phone_number"
+                            type="tel" required value="<?php echo $phone_number?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Email *</label>
-                        <input class="form-control" placeholder="Email" autocomplete="off" name="email" type="email"
+                        <input <?php echo $readonly?> class="form-control" placeholder="Email" autocomplete="off" name="email" type="email"
                             required value="<?php echo $email?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Present Address*</label>
                         <input class="form-control" placeholder="Present Address" autocomplete="off"
-                            name="presentAddress" type="text" required value="<?php echo $presentAddress?>">
+                            name="present_address" type="text" required value="<?php echo $present_address?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Permanent Address *</label>
                         <input class="form-control" placeholder="Permanent Address" autocomplete="off"
-                            name="permanentAddress" type="text" required value="<?php echo $permanentAddress?>">
+                            name="permanent_address" type="text" required value="<?php echo $permanent_address?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Date of Birth *</label>
-                        <input name="dob" value="<?php echo $dob?>" type="text" placeholder="dd/mm/yyyy"
+                        <input <?php echo $readonly?> name="dob" value="<?php echo $dob?>" type="text" placeholder="dd/mm/yyyy"
                             class="form-control air-datepicker" data-position="bottom right" required>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Birth certificate Id number *</label>
-                        <input class="form-control" placeholder="Birth certificate Id number" autocomplete="off"
-                            name="birthId" type="number" required value="<?php echo $birthId?>">
+                        <input <?php echo $readonly?> class="form-control" placeholder="Birth certificate Id number" autocomplete="off"
+                            name="birth_Id" type="number" required value="<?php echo $birth_Id?>">
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Gender *</label>
-                        <select class="select2" name="gender" required>
+                        <select class="select2" name="gender" required <?php echo $readonly?>>
                             <option>Please Select Gender </option>
                             <?php
                         $data=[
@@ -286,7 +338,7 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Blood Group *</label>
-                        <select class="form-control select2" name="bloodGroup">
+                        <select class="form-control select2" name="blood_group" <?php echo $readonly?>>
                             <option>Select Blood Group</option>
                             <?php
                             $data=[
@@ -314,7 +366,7 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Religion *</label>
-                        <select class="select2" name="religion" required>
+                        <select class="select2" name="religion" required <?php echo $readonly?>>
                             <option>Please Select Religion </option>
                             <?php
                         $data=[
@@ -339,7 +391,7 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Class *</label>
-                        <select class="form-control select2" name="class">
+                        <select class="form-control select2" name="class" <?php echo $readonly?>>
                             <option>Select Class</option>
                             <?php
                             $res=mysqli_query($con,"SELECT * FROM `class` where status='1'");
@@ -355,7 +407,7 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label> Quota *</label>
-                        <select class="select2" name="quota" required>
+                        <select class="select2" name="quota" required <?php echo $readonly?>>
                             <option>Please Select Quota </option>
                             <?php
                             $data=[
@@ -376,20 +428,15 @@ if(isset($_POST['submit'])){
                         </select>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Merit</label>
-                        <input class="form-control" placeholder="Last Exam Result" autocomplete="off" name="merit"
-                            type="text" required value="<?php echo $merit?>">
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-12 form-group">
                         <label>Legal Guardian Name</label>
                         <input class="form-control" placeholder="Legal Guardian Name" autocomplete="off"
-                            name="legalGuardianName" type="text" value="<?php echo $legalGuardianName?>" required>
+                            name="local_guardian_name" type="text" value="<?php echo $local_guardian_name?>" required>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-12 form-group">
-                        <label>Legal Guardian Relation</label>
-                        <input class="form-control" placeholder="Legal Guardian Relation" autocomplete="off"
-                            name="legalGuardianRelation" type="text" required
-                            value="<?php echo $legalGuardianRelation?>">
+                        <label>Legal Guardian NID</label>
+                        <input class="form-control" placeholder="Legal Guardian NID" autocomplete="off"
+                            name="local_guardian_nid" type="text" required
+                            value="<?php echo $local_guardian_nid?>">
                     </div>
                     <div class="col-lg-6 col-12 form-group">
                         <div class="col-sm-12 img-body">

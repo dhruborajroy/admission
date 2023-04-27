@@ -57,7 +57,6 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
          }else{
             $_SESSION['PAYMENT_ERROR']='<script>swal("'.ucfirst($_GET['status']).'", "Payment completed", "success")</script>';
          }
-         // https://getadmittedonline.thewebdivers.com/payments_status?bkash_payment_id=TR00118Y1682419571979&status=Insufficient%20Funds&statusMessage=Insufficient%20Balance
       }elseif(isset($_GET['statusMessage']) && isset($_GET['status'])){
          $status=urldecode($_GET['status']);
          $statusMessage=urldecode($_GET['statusMessage']);

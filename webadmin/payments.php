@@ -25,13 +25,13 @@ $res=mysqli_query($con,$sql);
 <div class="dashboard-content-one">
     <!-- Breadcubs Area Start Here -->
     <div class="breadcrumbs-area">
-        <!-- <h3>Parents</h3>
+        <h3>Payments</h3>
             <ul>
                 <li>
-                    <a href="index.php">Home</a>
+                    <a href="index">Home</a>
                 </li>
-                <li>All Buses</li>
-            </ul> -->
+                <li>All Payments</li>
+            </ul>
     </div>
     <!-- Breadcubs Area End Here -->
     <!-- Teacher Table Area Start Here -->
@@ -39,20 +39,16 @@ $res=mysqli_query($con,$sql);
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>All Students Data</h3>
+                    <h3>Payments</h3>
                 </div>
-                <div class="dropdown show">
-                    <a class="dropdown-toggle" href="../pdf/list.php" aria-expanded="true">Generate PDF</a>
-                </div>
-            </div>
-            <form class="mg-b-20">
-                <div class="row gutters-8">
-                    <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                        <input type="text" placeholder="Search by ID/ Name/ Number ..." class="form-control"
-                            id="myInput">
+                <!-- <div class="dropdown show">
+                    <div class="col-12 form-group mg-t-8">
+                        <a href="manageDepts"> <button type="submit"
+                                class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Add new Department</button>
+                        </a>
                     </div>
-                </div>
-            </form>
+                </div> -->
+            </div>
             <div class="table-responsive">
                 <table class="table display data-table text-nowrap">
                     <thead>
@@ -78,14 +74,14 @@ $res=mysqli_query($con,$sql);
                             <td class="sorting_1 dtr-control"><?php echo $row['amount']?></td>
                             <td class="sorting_1 dtr-control"><?php echo $row['trxID']?></td>
                             <?php if($row['status']=="Completed"){?>
-                                <td class="dtr-control badge badge-pill badge-success d-block mg-t-8"><?php echo $row['status']?></td>
+                                <td class="badge badge-pill badge-success d-block mg-t-8"><?php echo $row['status']?></td>
                             <?php }elseif($row['status']=="Failed"){?>
                                 <td class="badge badge-pill badge-danger d-block mg-t-8"><?php echo $row['status']?></td>
                             <?php }else{?>
                                 <td class="badge badge-pill badge-warning d-block mg-t-8"><?php echo $row['status']?></td>
                             <?php }?>
                             <?php if($row['status']=="Completed"){?>
-                                <td ><a class="dtr-control badge badge-pill badge-success d-block mg-t-8" href="refundPayment?payment_id=<?php echo $row['tran_id']?>" class="invoice-no">Refund</a></td>
+                                <td class="badge badge-pill badge-success d-block mg-t-8"><a class="dtr-control badge badge-pill badge-success d-block mg-t-8" href="refundPayment?payment_id=<?php echo $row['tran_id']?>" class="invoice-no">Refund</a></td>
                             <?php }else{?>
                                 <td><span  class="badge badge-pill badge-warning d-block mg-t-8"><?php echo $row['statusMessage']?></span></td>
                             <?php }?>
@@ -95,7 +91,7 @@ $res=mysqli_query($con,$sql);
                            $i++;
                            } } else { ?>
                         <tr>
-                            <td colspan="5">No data found</td>
+                            <td colspan="7" align="center">No data found</td>
                         </tr>
                         <?php } ?>
                 </table>

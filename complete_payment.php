@@ -50,6 +50,7 @@
          );
       }
    }
+   
 //Bkash Payment started
 $total_amount=round(intval(FORM_AMOUNT)*(1+SERVICE_CHARGE),2);
 if(isset($_POST['bkash'])){

@@ -13,7 +13,7 @@
    <head>
       <meta charset="utf-8">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>BEC HALL | Developed by Dhrubo</title>
+      <title>Get Admitted Online | Developed by Dhrubo</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- Favicon -->
@@ -109,7 +109,7 @@
                         <span>Admin</span>
                      </div>
                      <div class="admin-img">
-                        <img src="<?php echo STUDENT_IMAGE.$row['image']?>" alt="Admin">
+                        <img  style="width: 50px;height: 50px;"  src="<?php echo STUDENT_IMAGE.$row['image']?>" alt="Admin">
                      </div>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
@@ -202,26 +202,21 @@
                      <span>Dashboard</span>
                   </a>
                </li>
-               <li class="nav-item sidebar-nav-item">
-                  <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Applicants</span></a>
-                  <ul class="nav sub-group-menu <?php // echo  $application_group_active?>">
-                     <li class="nav-item">
-                        <a href="users"
-                           class="nav-link <?php // echo  $application_sub_group_active?>"><i
-                           class="fas fa-angle-right"></i>All
-                        Applicants</a>
-                     </li>
-                  </ul>
+               <li class="nav-item">
+                  <a href="applicants" class="nav-link <?php // echo  $index_active?>">
+                     <i class="flaticon-classmates"></i>
+                     <span>Applicants</span>
+                  </a>
                </li>
                <li class="nav-item">
                   <a href="payments" class="nav-link <?php // echo  $index_active?>">
-                     <i class="flaticon-dashboard"></i>
+                     <i class="flaticon-money"></i>
                      <span>Payments</span>
                   </a>
                </li>
                <li class="nav-item">
                   <a href="refunds" class="nav-link <?php // echo  $index_active?>">
-                     <i class="flaticon-dashboard"></i>
+                     <i class="flaticon-shopping-list"></i>
                      <span>Refunds</span>
                   </a>
                </li>
@@ -248,7 +243,7 @@
                      </ul>
                </li>
                <li class="nav-item sidebar-nav-item">
-                  <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Subjects</span></a>
+                  <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Subjects</span></a>
                   <ul class="nav sub-group-menu <?php // echo  $application_group_active?>">
                   <li class="nav-item">
                         <a href="subjects"

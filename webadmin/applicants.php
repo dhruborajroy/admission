@@ -26,13 +26,13 @@ $res=mysqli_query($con,$sql);
 <div class="dashboard-content-one">
     <!-- Breadcubs Area Start Here -->
     <div class="breadcrumbs-area">
-        <!-- <h3>Parents</h3>
+        <h3>Applicants</h3>
             <ul>
                 <li>
-                    <a href="index.php">Home</a>
+                    <a href="index">Home</a>
                 </li>
-                <li>All Buses</li>
-            </ul> -->
+                <li>All Applicants</li>
+            </ul>
     </div>
     <!-- Breadcubs Area End Here -->
     <!-- Teacher Table Area Start Here -->
@@ -40,37 +40,16 @@ $res=mysqli_query($con,$sql);
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>All Students Data</h3>
+                    <h3>Applicants</h3>
                 </div>
-                <div class="item-title row">
-                    <form action="./pdfreports/users.php">
-                    <div class="row">
-                        <select name="batch_id" id="batch_id">
-                        <option value="">Select Batch</option>
-                            <?php
-                            $batch_res=mysqli_query($con,"SELECT * FROM `batch` where status='1' order by numaric_value asc");
-                            while($batch_row=mysqli_fetch_assoc($batch_res)){
-                                if($batch_row['id']==$batch){
-                                    echo "<option selected='selected' value=".$batch_row['id'].">".$batch_row['name']."</option>";
-                                }else{
-                                    echo "<option value=".$batch_row['id'].">".$batch_row['name']."</option>";
-                                }                                                        
-                            }
-                            ?>
-                        </select>
-                        <input type="submit" value="Generate report">
-                    </div>
-                    </form>
+                <div class="dropdown show">
+                    <!-- <div class="col-12 form-group mg-t-8">
+                        <a href="manageDepts"> <button type="submit"
+                                class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Add new Department</button>
+                        </a>
+                    </div> -->
                 </div>
             </div>
-            <form class="mg-b-20">
-                <div class="row gutters-8">
-                    <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                        <input type="text" placeholder="Search by ID/ Name/ Number ..." class="form-control"
-                            id="myInput">
-                    </div>
-                </div>
-            </form>
             <div class="table-responsive">
                 <table class="table display data-table text-nowrap">
                     <thead>
@@ -117,7 +96,7 @@ $res=mysqli_query($con,$sql);
                                                     class="fas fa-times text-orange-red"></i>Active</a>
                                         <?php }?>
                                         <a class="dropdown-item"
-                                            href="manageStudentProfile.php?id=<?php echo md5($row['id'])?>"><i
+                                            href="manageStudentProfile.php?id=<?php echo $row['id']?>"><i
                                                 class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
                                         <!-- <a class="dropdown-item" href="#"><i
                                                 class="fas fa-redo-alt text-orange-peel"></i>Refresh</a> -->

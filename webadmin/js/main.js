@@ -101,13 +101,13 @@ function myFunction() {
 	if ($.fn.DataTable !== undefined) {
 	  $('.data-table').DataTable({
 		paging: true,
-		searching: false,
-		info: false,
-		lengthChange: false,
+		searching: true,
+		info: true,
+		lengthChange: true,
 		lengthMenu: [20, 50, 75, 100],
 		columnDefs: [{
 		  targets: [0, -1], // column or columns numbers
-		  orderable: false // set orderable for selected columns
+		  orderable: true // set orderable for selected columns
 		}],
 	  });
 	}

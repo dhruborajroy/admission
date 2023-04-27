@@ -8,6 +8,31 @@ require_once("./inc/smtp/class.phpmailer.php");
 // if(!isset($_SESSION['APPLICANT_LOGIN'])){
 //     redirect('login');
 // }
+
+$swl="select * from `site_details` where id=1";
+$res=mysqli_query($con,$swl);
+if(mysqli_num_rows($res)>0){
+    $row=mysqli_fetch_assoc($res);
+    $site_name=$row['name'];
+    $site_email=$row['email'];
+    $site_address=$row['address'];
+    $site_phone=$row['phone'];
+    $site_facebook_link=$row['facebook_link'];
+    $site_twitter_link=$row['twitter_link'];
+    $site_youtube_link=$row['youtube_link'];
+    $site_instagram_link=$row['instagram_link'];
+    $site_short_details=$row['short_details'];
+}else{
+    $site_name="";
+    $site_email="";
+    $site_address="";
+    $site_phone="";
+    $site_facebook_link="";
+    $site_twitter_link="";
+    $site_youtube_link="";
+    $site_instagram_link="";
+    $site_short_details="";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +48,7 @@ require_once("./inc/smtp/class.phpmailer.php");
       <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
       <link rel="stylesheet" href="assets/css/toastr.min.css">
       <link rel="stylesheet" href="assets/css/datepicker.min.css">
+      <link rel="stylesheet" href="assets/plugins/dropzone/dropzone.min.css">
       <link rel="stylesheet" href="assets/css/style.css">
    </head>
    <body class="pop-modal">

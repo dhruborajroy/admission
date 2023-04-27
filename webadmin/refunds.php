@@ -28,9 +28,9 @@ $res=mysqli_query($con,$sql);
         <h3>Refund</h3>
             <ul>
                 <li>
-                    <a href="index.php">Home</a>
+                    <a href="index">Home</a>
                 </li>
-                <li>All Refunds</li>
+                <li>All Refund</li>
             </ul>
     </div>
     <!-- Breadcubs Area End Here -->
@@ -39,20 +39,16 @@ $res=mysqli_query($con,$sql);
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>All Students Data</h3>
+                    <h3>Refunds</h3>
                 </div>
                 <div class="dropdown show">
-                    <a class="dropdown-toggle" href="../pdf/list.php" aria-expanded="true">Generate PDF</a>
+                    <!-- <div class="col-12 form-group mg-t-8">
+                        <a href="manageDepts"> <button type="submit"
+                                class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Add new Department</button>
+                        </a>
+                    </div> -->
                 </div>
             </div>
-            <form class="mg-b-20">
-                <div class="row gutters-8">
-                    <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                        <input type="text" placeholder="Search by ID/ Name/ Number ..." class="form-control"
-                            id="myInput">
-                    </div>
-                </div>
-            </form>
             <div class="table-responsive">
                 <table class="table display data-table text-nowrap">
                     <thead>

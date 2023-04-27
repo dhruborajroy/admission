@@ -71,12 +71,6 @@ if(isset($_GET['paymentID']) && $_GET['paymentID']!="" && isset($_GET['status'])
             redirect("payments_status?bkash_payment_id=".$paymentID."&status=".$status."&paymentID=".$paymentID);
         }
     }
-    // else{
-    //     $sql="update bkash_online_payment set status='".$status."', statusMessage='$statusMessage', updated_on='$time' where bkash_payment_id='$paymentID'";
-    //     if(mysqli_query($con,$sql)){
-    //         redirect("payments_status?status=".$status."&paymentID=".$paymentID);
-    //     }
-    // }
 }
 // echo $sql;
 ?>

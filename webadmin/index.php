@@ -32,10 +32,42 @@ include('header.php');?>
          </div>
       </div>
    </div>
+   <div class="col-xl-3 col-sm-6 col-12">
+      <div class="dashboard-summery-one mg-b-20">
+         <div class="row align-items-center">
+            <div class="col-6">
+               <div class="item-icon bg-light-green ">
+                  <!-- <i class="flaticon-classmates text-green"></i> -->
+                  <img src="../assets/img/cashless-payment.png" alt="" srcset="">
+               </div>
+            </div>
+            <div class="col-6">
+               <div class="item-content">
+                  <div class="item-title">Total Amount</div>
+                  <div class="item-number"><span class="counter" data-num="<?php echo $students=getTotalPaidAmount()?>"><?php echo $students?></span></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 <!-- Dashboard summery End Here -->
 <!-- Dashboard Content Start Here -->
 <div class="row gutters-20">
+   <div class="col-12 col-xl-12 col-3-xxxl">
+      <div class="card dashboard-card-three pd-b-20">
+            <div class="card-body">
+               <div class="heading-layout1">
+                  <div class="item-title">
+                        <h3>Male Female Student Count</h3>
+                  </div>
+               </div>
+               <div class="expense-bar-wrap">
+                  <canvas id="expense-bar-chart" width="100" height="300"></canvas>
+               </div>
+            </div>
+      </div>
+   </div>
    <div class="col-lg-12 col-xl-12 col-12-xxxl">
       <div class="card dashboard-card-six pd-b-20">
          <div class="card-body">

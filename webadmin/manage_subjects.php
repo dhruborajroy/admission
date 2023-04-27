@@ -53,7 +53,7 @@ if(isset($_POST['submit'])){
             <li>
                 <a href="index.php">Home</a>
             </li>
-            <li>Notices </li>
+            <li>Subject </li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
@@ -64,25 +64,25 @@ if(isset($_POST['submit'])){
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
-                            <h3>Create A Notice</h3>
+                            <h3>Create A Subject</h3>
                             <?php echo $msg?>
                         </div>
                     </div>
                     <form id="validate" class="new-added-form" method="post">
                         <div class="row">
                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                <label>Reference No</label>
-                                <input type="text" required placeholder="" class="form-control" name="name" id="name"
+                                <label>Subject Name</label>
+                                <input type="text" required placeholder="Ex: Bangla" class="form-control" name="name" id="name"
                                     value="<?php echo $name?>">
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                 <label>Subject Code</label>
-                                <input type="text" required placeholder="" class="form-control" name="sub_code" id="sub_code"
+                                <input type="text" required placeholder="Ex: BAN 101" class="form-control" name="sub_code" id="sub_code"
                                     value="<?php echo $sub_code?>">
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                 <label>Full Mark</label>
-                                <input type="text" required placeholder="" class="form-control" name="full_mark" id="full_mark"
+                                <input type="text" required placeholder="ex: 100" class="form-control" name="full_mark" id="full_mark"
                                     value="<?php echo $full_mark?>" min="0" max="100">
                             </div>
                             <div class="col-12 form-group mg-t-8">

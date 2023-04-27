@@ -143,7 +143,7 @@ if(isset($_POST['bkash'])){
    </div>
 </div>
 <section class="course-content checkout-widget">
-   <div class="container">
+<div class="container">
       <div class="col-md-12">
          <div class="settings-widget">
             <div class="settings-inner-blk p-0">
@@ -151,7 +151,6 @@ if(isset($_POST['bkash'])){
                   <h3 align="center">Basic Informations</h3>
                   <table width="100%">
                   <tr>
-                     <!-- <td></td> -->
                      <td align="center"><img style="border-radius: 15px;width: 80%;max-width: 300px;max-height: 300px;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;" src="./media/users/<?php echo $image?>" alt="preview image" width="300px" height="300px"></td>
                   </tr>
                   </table>

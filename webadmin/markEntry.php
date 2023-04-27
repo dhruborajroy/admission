@@ -44,7 +44,6 @@
          redirect("markEntry");
       }
    }else{
-
       $_SESSION['TOASTR_MSG']=array(
          'type'=>'error',
          'body'=>'You don\'t have the permission to access the location!',
@@ -119,7 +118,7 @@
 <div class="dashboard-content-one">
    <!-- Breadcubs Area Start Here -->
    <div class="breadcrumbs-area">
-      <h3>Meal Maintenance</h3>
+      <h3>Mark Maintenance</h3>
       <ul>
          <li>
             <a href="index.php">Home</a>
@@ -139,6 +138,7 @@
             <form method="get">
                <div class="row">
                   <div class="col-3">
+                     <label>Year <span class="text-danger">*</span></label>
                      <select name="year" class="select2">
                         <option value="0" disabled selected>Select year</option>
                                  <?php
@@ -161,6 +161,7 @@
                      </select>
                   </div>
                   <div class="col-3">
+                     <label>Exam <span class="text-danger">*</span></label>
                      <select name="exam" class="select2">
                         <option value="0" disabled selected>Select Exam</option>
                         <?php
@@ -176,6 +177,7 @@
                      </select>
                   </div>
                   <div class="col-3">
+                     <label>Class <span class="text-danger">*</span></label>
                      <select name="class" class="select2">
                         <option value="0" disabled selected>Select Class</option>
                         <?php
@@ -191,6 +193,7 @@
                      </select>
                   </div>
                   <div class="col-3">
+                     <label>Subject <span class="text-danger">*</span></label>
                      <select name="subject" class="select2">
                         <option value="0" disabled selected>Select subject</option>
                         <?php
@@ -206,10 +209,9 @@
                      </select>
                   </div>
                   <div class="col-12 form-group mt-3">
-                     <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" value="Search">Search</button>
                      <a class="btn-fill-lg bg-blue-dark btn-hover-yellow" href="markEntry">Reset</a>
+                     <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" value="Search">Search</button>
                   </div>
-                  <!-- <input type="submit" value="Search"> -->
                </div>
             </div>
          </form>
@@ -232,7 +234,6 @@
                      <th>Name</th>
                      <th>Exam Roll</th>
                      <th></th>
-                     <!-- <input type="number" id="number" min="0" onkeyup="checkAll()"> -->
                   </tr>
                </thead>
                <tbody>

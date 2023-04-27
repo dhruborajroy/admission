@@ -199,6 +199,34 @@ function gettotalstudent(){
 	  return $row['student'];
 	}
 }
+
+function gettotalstudentByMale(){
+	global $con;
+	$sql="SELECT count(DISTINCT id) as student FROM applicants where gender='Male'";
+	$res=mysqli_query($con,$sql);
+	while($row=mysqli_fetch_assoc($res)){
+        return $row['student'];
+	}
+}
+
+function gettotalstudentByFemale(){
+	global $con;
+	$sql="SELECT count(DISTINCT id) as student FROM applicants where gender='Female'";
+	$res=mysqli_query($con,$sql);
+	while($row=mysqli_fetch_assoc($res)){
+        return $row['student'];
+	}
+}
+
+
+function getTotalPaidAmount(){
+	global $con;
+	$sql="SELECT sum(amount) as amount FROM bkash_online_payment";
+	$res=mysqli_query($con,$sql);
+	while($row=mysqli_fetch_assoc($res)){
+	  return $row['amount'];
+	}
+}
 function send_email_using_tamplate($name,$otp){
 	$tamplate= "email.php";
 	$file_content=file_get_contents("../email.php");
