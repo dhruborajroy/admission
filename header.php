@@ -40,15 +40,20 @@ if(mysqli_num_rows($res)>0){
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
       <title><?php echo NAME." || ".TAGLINE?></title>
+      <!-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.svg"> -->
       <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.svg">
       <link rel="stylesheet" href="assets/css/bootstrap.min.css">
       <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
       <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
       <link rel="stylesheet" href="assets/css/feather.css">
-      <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+      <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">      
+      <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+      <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+      <link rel="stylesheet" href="assets/plugins/slick/slick.css">
+      <link rel="stylesheet" href="assets/plugins/slick/slick-theme.css">
+      <link rel="stylesheet" href="assets/plugins/aos/aos.css">
       <link rel="stylesheet" href="assets/css/toastr.min.css">
       <link rel="stylesheet" href="assets/css/datepicker.min.css">
-      <link rel="stylesheet" href="assets/plugins/dropzone/dropzone.min.css">
       <link rel="stylesheet" href="assets/css/style.css">
    </head>
    <body class="pop-modal">
@@ -93,14 +98,11 @@ if(mysqli_num_rows($res)>0){
                            <li>
                               <a href="complete_payment">Complete Payment</a>
                            </li>
-                           <li >
-                              <a href="login">Login</a>
-                           </li>
                            <?php }?>
                         </ul>
                      </div>
-                     <?php if(isset($_SESSION['APPLICANT_ID'])){?>
                      <ul class="nav header-navbar-rht">
+                     <?php if(isset($_SESSION['APPLICANT_ID'])){?>
                         <li class="nav-item user-nav">
                            <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                               <span class="user-img">
@@ -115,7 +117,7 @@ if(mysqli_num_rows($res)>0){
                                  </div>
                                  <div class="user-text">
                                     <h6><?php echo  $_SESSION['APPLICANT_NAME']?></h6>
-                                    <!-- <p class="text-muted mb-0">Instructor</p> -->
+                                    <p class="text-muted mb-0"></p>
                                  </div>
                               </div>
                               <a class="dropdown-item" href="dashboard"><i class="feather-home me-1"></i> Dashboard</a>
@@ -123,8 +125,15 @@ if(mysqli_num_rows($res)>0){
                               <a class="dropdown-item" href="logout"><i class="feather-log-out me-1"></i> Logout</a>
                            </div>
                         </li>
-                     </ul>
+                     <?php }else{?>
+                        <li >
+                           <a class="nav-link header-login" href="login">Login</a>
+                           </li>
+                        <li class="nav-item">
+                           <a class="nav-link header-sign" href="#">Contact us</a>
+                        </li>
                      <?php }?>
+                     </ul>
                   </div>
                </nav>
             </div>

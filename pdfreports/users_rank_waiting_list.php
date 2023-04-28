@@ -37,7 +37,7 @@ $html.='<table class="table" width="100%" >';
 $html.='
     <tr>
         <td align="center" style="font-size:20px">                    
-             <b>Admit Card</b>
+             <b>Waiting List</b>
         </td>
     </tr>';
 $html.="</table>";
@@ -54,13 +54,12 @@ $html.='<tr>
         <td style="border: 1px solid black;border-collapse: collapse;background-color: #b7b4b4;text-align:center;">Phone</td>
         <td style="border: 1px solid black;border-collapse: collapse;background-color: #b7b4b4;text-align:center;">email</td>
     </tr>';
-    $sql="select * from applicants order by merit desc";
+    $sql="select * from applicants order by merit asc limit 5, 10";
     $res=mysqli_query($con,$sql);
     if(mysqli_num_rows($res)>0){
         $i=1;
         while($row=mysqli_fetch_assoc($res)){
             // the while loop
-
             $html.='<tr>
             <td style="border: 1px solid black;border-collapse: collapse;text-align:center;">'.$i.'</td>
             <td style="border: 1px solid black;border-collapse: collapse;text-align:center;"><img src="'.STUDENT_IMAGE.$row['image'].'" style="border-radius:60px" height="100px" weight="100px"></td>
@@ -82,7 +81,7 @@ $html.='<tr>
         </tr>';
     }//else ended
 $html.='</table>';
-    echo $html;
+    // echo $html;
 $mpdf=new \Mpdf\Mpdf([
     'tempDir' => __DIR__ . '/custom/temp/dir/path',
     'default_font_size' => 12,
@@ -92,8 +91,8 @@ $mpdf=new \Mpdf\Mpdf([
 	'margin_top' => 17,
 	'margin_bottom' => 20,
 ]);
-// $mpdf->SetTitle('Admit Card');
-// $mpdf->SetFooter('|| Developed By The Web Divers');
-// $mpdf->WriteHTML($html);
-// $file="Rank_".time().'.pdf';
-// $mpdf->output($file,'I');
+$mpdf->SetTitle('Admit Card');
+$mpdf->SetFooter('|| Developed By The Web Divers');
+$mpdf->WriteHTML($html);
+$file="Rank_".time().'.pdf';
+$mpdf->output($file,'I');

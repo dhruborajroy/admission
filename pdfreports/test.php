@@ -26,12 +26,12 @@ $cabecera = file_get_contents('http://localhost/admission/html/students-list.htm
 // $pie = file_get_contents('./pie.html');
 
 // $mpdf->SetHTMLHeader($cabecera);
-// $mpdf->SetHTMLFooter($pie);
+$mpdf->SetHTMLFooter($pie);
 
 $mpdf->SetDefaultBodyCSS('background', "url('background_300dpi.png')");
 $mpdf->SetDefaultBodyCSS('background-image-resize', 6);
 
-$mpdf->WriteHTML($cabecera, 2);
+$mpdf->WriteHTML($cabecera);
 
 $mpdf->Output();
 ?>

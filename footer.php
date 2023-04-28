@@ -69,6 +69,7 @@
             </div>
          </footer>
       </div>
+
       <script src="assets/js/jquery-3.6.0.min.js"></script>
       <script src="assets/js/bootstrap.bundle.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -81,7 +82,13 @@
       <script src="assets/js/toastr.min.js"></script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       <script src="assets/plugins/dropzone/dropzone.min.js"></script>
-      <script src="assets/js/md5.min.js"></script>
+      <!-- <script src="assets/js/md5.min.js"></script> -->
+      <script src="assets/js/jquery.waypoints.js"></script>
+      <script src="assets/js/jquery.counterup.min.js"></script>
+      <script src="assets/plugins/select2/js/select2.min.js"></script>
+      <script src="assets/js/owl.carousel.min.js"></script>
+      <script src="assets/plugins/slick/slick.js"></script>
+      <script src="assets/plugins/aos/aos.js"></script>
       <script src="assets/js/script.js"></script>
       <script>
          var x=1;

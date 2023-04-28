@@ -11,14 +11,18 @@ $msg="";
 // }
 // if(isset($_POST['submit'])){
    	// $password=get_safe_value($_POST['password']);
-   	echo $sql="SELECT mark.* ,sum(mark) as total, RANK() OVER(ORDER BY sum(mark) DESC,mark desc,id desc) as `rank` FROM mark group by exam_roll";
-	$res=mysqli_query($con,$sql);
+   	// echo $sql="SELECT mark.* ,sum(mark) as total, RANK() OVER(ORDER BY sum(mark) DESC,mark desc,id desc) as `rank` FROM mark group by exam_roll";
+	$sql="SELECT mark.*,sum(mark.mark) as total_mark FROM `mark` group by exam_roll order by sum(mark.mark) desc, exam_roll desc,mark.mark DESC";
+    $res=mysqli_query($con,$sql);
+    $i=1;
     while($row=mysqli_fetch_assoc($res)){
         // pr($row);
-        $rank=$row['rank'];
         $exam_roll=$row['exam_roll'];
-        echo $rank_sql="update applicants set merit='$rank' where examRoll='$exam_roll'";
-        mysqli_query($con,$rank_sql);
+        $rank_sql="update applicants set merit='$i' where examRoll='$exam_roll'";
+        if(mysqli_query($con,$rank_sql)){
+            echo "Rank Generated";
+        }
+        $i++;
     }
 // }
 ?>

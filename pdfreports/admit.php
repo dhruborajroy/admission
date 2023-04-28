@@ -11,8 +11,6 @@ if(!isset($_SESSION['APPLICANT_ID'])){
     );
     redirect("../index");
 }
-require_once("../inc/smtp/class.phpmailer.php");
-require('../inc/vendor/autoload.php');
 $html="";
 $html.='<table class="table" width="100%" style="border: 1px solid black;border-collapse: collapse;">';
 $html.='

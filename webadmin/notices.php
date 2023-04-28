@@ -63,7 +63,7 @@
                                 <a href="manage_notice?id=<?php echo $row['id']?>" style="color:black">Edit</a>
                             </div>
                             <div class="post-date bg-orange">
-                                <a href="./pdfreports/notice.php?notice_id=<?php echo $row['id']?>" style="color:white">Generate Pdf</a>
+                                <a href="../pdfreports/notice.php?notice_id=<?php echo $row['id']?>" style="color:white">Generate Pdf</a>
                             </div>
 
                             <h6 class="notice-title"><a href="#"><?php echo $row['title']?></a></h6>

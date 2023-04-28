@@ -12,7 +12,7 @@ $status="pending";
 $createPayment['bkashURL']="";
 $createPayment['message']="";
 if(!isset($_SESSION['APPLICANT_LOGIN'])){
-   // redirect('index.php');
+   redirect('index.php');
 }
 $user_id=$_SESSION['APPLICANT_ID'];
 $sql="select * from `applicants` where id='".$_SESSION['APPLICANT_ID']."'";
@@ -83,21 +83,6 @@ if(isset($_GET['status'])){
                         <div class="settings-inner-blk p-0">
                            <div class="comman-space pb-0">
                               <?php echo $msg?>
-                              <?php 
-                              // $sql="select tran_id from bkash_online_payment where user_id='".$user_id."'";
-                              // $res=mysqli_query($con,$sql);
-                              // if(mysqli_num_rows($res)>!0){}else{
-                              ?>
-                              <!-- <form  method="post">
-                              <div class="go-dashboard text-center ">
-                                    <br>
-                                    <button type="submit" name="bkash" >
-                                       <img src="./assets/img/bkash.png" weight="100px" height="70px" alt="Bkash Payment" >
-                                    </button>
-                                    <!-- <button type="submit" name="sslcommerz" class="btn btn-primary">Pay Using Online Payment</button> 
-                              </div>
-                              </form> -->
-                              <?php //}?>
                               <div class="settings-invoice-blk table-responsive comman-space pb-0">
                                  <h4 align="center">Payments</h4>
                                  <table class="table table-borderless mb-0">
@@ -106,7 +91,6 @@ if(isset($_GET['status'])){
                                           <th>Order id</th>
                                           <th>amount</th>
                                           <th>Date</th>
-                                          <!-- <th>Payment ID</th> -->
                                           <th>TrxID</th>
                                           <th>Payment Details</th>
                                           <th>status</th>
@@ -125,7 +109,6 @@ if(isset($_GET['status'])){
                                           <td><a href="pdfreports/invoice?invoice_id=<?php echo $row['tran_id']?>" class="invoice-no">#<?php echo $row['tran_id']?></a></td>
                                           <td><?php echo $row['amount']?></td>
                                           <td><?php echo date("d M Y h:i A",$row['updated_on'])?></td>
-                                          <!-- <td><?php //echo $row['bkash_payment_id']?></td> -->
                                           <td><?php echo $row['trxID']?></td>
                                           <?php if($row['status']=='Completed'){?>
                                              <td><span class="badge status-completed"><?php echo $row['status']?></span></td>
@@ -139,7 +122,7 @@ if(isset($_GET['status'])){
                                           $i++;
                                           } } else { ?>
                                        <tr>
-                                          <td colspan="5" align="center">No data found</td>
+                                          <td colspan="7" align="center">No data found</td>
                                        </tr>
                                        <?php } ?>
                                     </tbody>
