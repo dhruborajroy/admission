@@ -21,15 +21,7 @@ $mpdf->setAutoTopMargin = 'stretch';
 $mpdf->SetDisplayMode('fullpage');
 
 
-$cabecera = file_get_contents('http://localhost/admission/html/students-list.html');
-// $cuerpo = file_get_contents('./cuerpo.html');
-// $pie = file_get_contents('./pie.html');
-
-// $mpdf->SetHTMLHeader($cabecera);
-$mpdf->SetHTMLFooter($pie);
-
-$mpdf->SetDefaultBodyCSS('background', "url('background_300dpi.png')");
-$mpdf->SetDefaultBodyCSS('background-image-resize', 6);
+$cabecera = file_get_contents('http://localhost/admission/webadmin/preview.php?id=NPKKGSCFF17');
 
 $mpdf->WriteHTML($cabecera);
 

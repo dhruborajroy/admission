@@ -1,12 +1,15 @@
 <?php
 define('NAME','Get Admitted Online');
+define('NAME_BANGLA','গেট এডমিটেড অনলাইন প্রি ক্যাডেট এন্ড কিন্ডার গার্টেন স্কুল');
+define('ADDRESS_BANGLA','ডাকঘরঃ সদর, উপজেলা ও জেলাঃ সদর লালমনিরহাট <br>স্থাপিতঃ ২০১৮');
+define('ADDITIONAL_INFO','বিদ্যালয় কোডঃ ৮৭২১৯৮ 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	    EIIN: 127988	  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     মোবাইলঃ০১৭০৫৯২৭২৫৭');
 define('TAGLINE','Get Admitted Online');
 define('EMAIL','contact@thewebdivers.com');
 define('PREFIX','NPKKGSC');
 define('FRONT_SITE_PATH','http://localhost/admission/');
 define('STORE_ID',"thewe630883975551e");
 define('STORE_PASSWORD',"thewe630883975551e@ssl");
-define('STUDENT_IMAGE',FRONT_SITE_PATH."admission/media/users/");
+define('STUDENT_IMAGE',FRONT_SITE_PATH."/media/users/");
 define('UPLOAD_APPLICANT_IMAGE',$_SERVER['DOCUMENT_ROOT']."/admission/media/users/");
 define('UPLOAD_STUDENT_IMAGE',$_SERVER['DOCUMENT_ROOT']."/admission/media/users/");
 // Bkash Test Constants
@@ -18,6 +21,7 @@ define("BASE_URL",'https://tokenized.sandbox.bka.sh/v1.2.0-beta');
 define("FORM_AMOUNT",320);
 define("SERVICE_CHARGE",0);
 //Bkash live credentials
+
 
 $curStr=$_SERVER['REQUEST_URI'];
 $curArr=explode('/',$curStr);

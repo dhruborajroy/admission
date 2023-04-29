@@ -43,11 +43,12 @@ $res=mysqli_query($con,$sql);
                     <h3>Applicants</h3>
                 </div>
                 <div class="dropdown show">
-                    <!-- <div class="col-12 form-group mg-t-8">
-                        <a href="manageDepts"> <button type="submit"
-                                class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Add new Department</button>
+                    <div class="col-12 form-group mg-t-8">
+                        <a href="../pdfreports/student-details">
+                                <button type="submit"
+                                class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Print Applicant's Data</button>
                         </a>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="table-responsive">

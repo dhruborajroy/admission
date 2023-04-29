@@ -1,30 +1,12 @@
 
-<style>
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
 <?php 
-include('header.php');
+   session_start();
+   // session_regenerate_id();
+   require('../inc/constant.inc.php');
+   require('../inc/connection.inc.php');
+   require('../inc/function.inc.php');
+   require_once("../inc/smtp/class.phpmailer.php");
+   isAdmin();
 if(isset($_GET['id']) && $_GET['id']!=""){
     $id=get_safe_value($_GET['id']);
     $sql="SELECT * FROM `applicants` where id='$id'";
@@ -69,19 +51,77 @@ if(isset($_GET['id']) && $_GET['id']!=""){
 }
 
 ?>
+
+<!doctype html>
+<html class="no-js" lang="">
+   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>Get Admitted Online | Developed by Dhrubo</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Favicon -->
+      <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+      <!-- Normalize CSS -->
+      <link rel="stylesheet" href="css/normalize.css">
+      <!-- Main CSS -->
+      <link rel="stylesheet" href="css/main.css">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- Fontawesome CSS -->
+      <link rel="stylesheet" href="css/all.min.css">
+      <!-- Flaticon CSS -->
+      <link rel="stylesheet" href="fonts/flaticon.css">
+      <!-- Full Calender CSS -->
+      <link rel="stylesheet" href="css/fullcalendar.min.css">
+      <!-- Animate CSS -->
+      <link rel="stylesheet" href="css/animate.min.css">
+      <!-- Select 2 CSS -->
+      <link rel="stylesheet" href="css/select2.min.css">
+      <!-- Data Table CSS -->
+      <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+      <!-- Date Picker CSS -->
+      <link rel="stylesheet" href="css/datepicker.min.css">
+      <!-- font awesome -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/fontawesome.min.css" />
+      <!-- summernote -->
+      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+      <!-- Toastr CSS -->
+      <link rel="stylesheet" href="css/toastr.min.css">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/custom.css">
+      <link rel="stylesheet" href="css/invoice.css">
+      <!-- Modernize js -->
+      <script src="js/modernizr-3.6.0.min.js"></script>
+
+        <style>
+        #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+        }
+        </style>
+   </head>
 <!-- Page Area Start Here -->
 <div class="dashboard-content-one">
-<!-- Breadcubs Area Start Here -->
-<div class="breadcrumbs-area">
-    <h3>Subjects</h3>
-        <ul>
-            <li>
-                <a href="index">Home</a>
-            </li>
-            <li>All Subjects</li>
-        </ul>
-</div>
-<!-- Breadcubs Area End Here -->
 <!-- Teacher Table Area Start Here -->
 <div class="card height-auto">
     <div class="card-body">
@@ -222,5 +262,59 @@ if(isset($_GET['id']) && $_GET['id']!=""){
         </div>
     </div>
     </div>
+</div><!-- Footer Area Start Here -->
+<footer class="footer-wrap-layout1">
+    <div class="copyright">© Copyrights <a href="#">Get Admitted Online Engineering College </a> 2018-<?php echo date('Y')?>.| P-1102 | V-1.1.2 |
+        All rights reserved. Developed by Dhrubo</div>
+</footer>
+<!-- Footer Area End Here -->
 </div>
-<?php include('footer.php');?>
+</div>
+<!-- Page Area End Here -->
+</div>
+<!-- jquery-->
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- Plugins js -->
+<script src="js/plugins.js"></script>
+<!-- Popper js -->
+<script src="js/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Counterup Js -->
+<script src="js/jquery.counterup.min.js"></script>
+<!-- Moment Js -->
+<script src="js/moment.min.js"></script>
+<!-- Waypoints Js -->
+<script src="js/jquery.waypoints.min.js"></script>
+<!-- Scroll Up Js -->
+<script src="js/jquery.scrollUp.min.js"></script>
+<!-- Full Calender Js -->
+<script src="js/fullcalendar.min.js"></script>
+<!-- Select 2 Js -->
+<script src="js/select2.min.js"></script>
+<!-- Date Picker Js -->
+<script src="js/datepicker.min.js"></script>
+<!-- Chart Js -->
+<script src="js/Chart.min.js"></script>
+<!-- Scroll Up Js -->
+<script src="js/jquery.scrollUp.min.js"></script>
+<!-- Data Table Js -->
+<script src="js/jquery.dataTables.min.js"></script>
+<!-- validate JS -->
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<!-- Custom Js -->
+<script src="js/toastr.min.js"></script>
+<!-- sweet alert JS -->
+<script src="./js/sweetalert.min.js"></script>
+<!-- summernote editor -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<!--  -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- Custom Js -->
+<script src="js/main.js"></script>
+<script src="js/custom.php"></script>
+<script src="js/validation.php"></script>
+
+</body>
+
+</html>

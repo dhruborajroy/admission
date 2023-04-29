@@ -35,7 +35,7 @@ $html.='<tr>
         <td style="border: 1px solid black;border-collapse: collapse;background-color: #b7b4b4;text-align:center;">Phone</td>
         <td style="border: 1px solid black;border-collapse: collapse;background-color: #b7b4b4;text-align:center;">Email</td>
     </tr>';
-    $sql="select * from applicants";
+    $sql="select applicants.*,class.name as class_name from applicants,class where applicants.class=class.id";
     $res=mysqli_query($con,$sql);
     if(mysqli_num_rows($res)>0){
         $i=1;
@@ -48,7 +48,7 @@ $html.='<tr>
             <td style="border: 1px solid black;border-collapse: collapse;text-align:center;overflow:hidden;inline:flex;">'.$row['first_name'].' '.$row['last_name'].'</td>
             <td style="border: 1px solid black;border-collapse: collapse;text-align:center;">'.$row['fName'].'</td>
             <td style="border: 1px solid black;border-collapse: collapse;text-align:center;">'.$row['mName'].'</td>
-            <td style="border: 1px solid black;border-collapse: collapse;text-align:center;">'.$row['class'].'</td>
+            <td style="border: 1px solid black;border-collapse: collapse;text-align:center;">'.$row['class_name'].'</td>
             <td style="border: 1px solid black;border-collapse: collapse;text-align:center;">'.$row['phoneNumber'].'</td>
             <td style="border: 1px solid black;border-collapse: collapse;text-align:center;">'.maskEmail($row['email']).'</td>
             </tr>';
