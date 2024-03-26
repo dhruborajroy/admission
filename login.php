@@ -110,21 +110,21 @@ if(isset($_POST['submit'])){
                            </div>
                         </div>
                         <h1>Sign into Your Account</h1>
-                        <span <?php echo $class?> ><?php echo $msg?></span>
                         <form method="post">
+                           <span <?php echo $class?>> <?php echo $msg?></span>
                            <div class="form-group">
                               <label class="form-control-label">Phone number</label>
-                              <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter your phone number">
+                              <input type="text" required name="phone_number" id="phone_number" class="form-control" placeholder="Enter your phone number">
                            </div>
                            <div class="form-group">
                               <label class="form-control-label">Password</label>
                               <div class="pass-group">
-                                 <input type="password" name="password" id="password" class="form-control pass-input" placeholder="Enter your password">
+                                 <input required type="password" name="password" id="password" class="form-control pass-input" placeholder="Enter your password">
                                  <span class="feather-eye toggle-password"></span>
                               </div>
                            </div>
                            <div class="forgot">
-                              <span><a class="forgot-link" href="forgot-password.html">Forgot Password ?</a></span>
+                              <span><a class="forgot-link" href="forgotPassword">Forgot Password ?</a></span>
                            </div>
                            <div class="remember-me">
                               <label class="custom_check mr-2 mb-0 d-inline-flex remember-me"> Remember me

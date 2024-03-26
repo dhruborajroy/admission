@@ -1,21 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-   <!-- Mirrored from dreamslms.dreamguystech.com/forgot-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Aug 2022 18:11:32 GMT -->
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-      <title>Dreams LMS</title>
-      <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.svg">
-      <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-      <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-      <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-      <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-      <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-      <link rel="stylesheet" href="assets/plugins/feather/feather.css">
-      <link rel="stylesheet" href="assets/css/style.css">
-   </head>
-   <body>
-      <div class="main-wrapper">
+<?php 
+include("header.php"); 
+   $phone_number="";
+   if(isset($_POST['submit'])){
+   	$phone_number=get_safe_value($_POST['phone_number']);
+      $res=mysqli_query($con,"select id,first_name from applicants where phoneNumber='$phone_number'");
+      if(mysqli_num_rows($res)>0){
+         $row=mysqli_fetch_assoc($res);
+         $first_name=$row['first_name'];
+         $password=rand(111111,999999);
+         echo $sql="update applicants set `password`='$password' where `phoneNumber`='$phone_number'";
+         mysqli_query($con,$sql);
+         $_SESSION['FORGOT_PASSWORD']=$password;
+         $sms="Dear $first_name, Password is ".$password;
+         // $sms_status=send_sms_greenweb($phone_number,$sms);
+         $sms_status="sent";
+         if($sms_status=='sent'){
+            $_SESSION['TOASTR_MSG']=array(
+               'type'=>'success',
+               'body'=>'Password has been sent to your number '.$phone_number.'.',
+               'title'=>'Success',
+            );
+         }
+      }
+   }
+   
+// prx($_SESSION);
+?>
+<div class="main-wrapper">
          <div class="row">
             <div class="col-md-6 login-bg">
                <div class="owl-carousel login-slide owl-theme aos" data-aos="fade-up">
@@ -54,31 +65,22 @@
                      <div class="img-logo">
                         <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
                         <div class="back-home">
-                           <a href="index-2.html">Back to Home</a>
+                           <a href="index">Back to Home</a>
                         </div>
                      </div>
                      <h1>Forgot Password ?</h1>
                      <div class="reset-password">
-                        <p>Enter your email to reset your password.</p>
+                        <p>Enter your Phone Number to reset your password.</p>
                      </div>
-                     <form action="https://dreamslms.dreamguystech.com/login.html">
+                     <form method="post">
                         <div class="form-group">
-                           <label class="form-control-label">Email</label>
-                           <input type="email" class="form-control" placeholder="Enter your email address">
+                           <label class="form-control-label">Phone Number</label>
+                           <input type="tel" name="phone_number" class="form-control" placeholder="Enter your Phone Number. Ex: 017xxxxx">
                         </div>
                         <div class="d-grid">
-                           <button class="btn btn-start" type="submit">Submit</button>
+                           <button class="btn btn-start" name="submit" type="submit">Submit</button>
                         </div>
                      </form>
                   </div>
                </div>
-            </div>
-         </div>
-      </div>
-      <script src="assets/js/jquery-3.6.0.min.js"></script>
-      <script src="assets/js/bootstrap.bundle.min.js"></script>
-      <script src="assets/js/owl.carousel.min.js"></script>
-      <script src="assets/js/script.js"></script>
-   </body>
-   <!-- Mirrored from dreamslms.dreamguystech.com/forgot-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Aug 2022 18:11:32 GMT -->
-</html>
+<?php include("footer.php")?>

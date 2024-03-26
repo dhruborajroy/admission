@@ -9,6 +9,7 @@ include('connection.inc.php');
 echo "<pre>";
 pr($_SESSION['MOBILE_OTP']);
 pr($_SESSION['EMAIL_OTP']);
+pr($_SESSION['FORGOT_PASSWORD']);
 // $grandToken=grandToken();
 // $user_data=['tran_id'=>'ssdn','amount'=>1];
 // $createPayment=createPayment($grandToken['id_token'],$user_data);

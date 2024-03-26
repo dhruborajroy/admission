@@ -92,7 +92,7 @@ if(isset($_POST['bkash'])){
                redirect($createPayment['bkashURL']);
                die;
             }else{
-               echo $sql;
+               // echo $sql;
                $_SESSION['TOASTR_MSG']=array(
                   'type'=>'error',
                   'body'=>'Something went wrong!',
@@ -106,7 +106,7 @@ if(isset($_POST['bkash'])){
                redirect($createPayment['bkashURL']);
                die;
             }else{
-               echo $sql;
+               // echo $sql;
                $_SESSION['TOASTR_MSG']=array(
                   'type'=>'error',
                   'body'=>'Something went wrong!',

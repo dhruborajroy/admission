@@ -2,7 +2,7 @@
 define('NAME','Get Admitted Online');
 define('NAME_BANGLA','গেট এডমিটেড অনলাইন প্রি ক্যাডেট এন্ড কিন্ডার গার্টেন স্কুল');
 define('ADDRESS_BANGLA','ডাকঘরঃ সদর, উপজেলা ও জেলাঃ সদর লালমনিরহাট <br>স্থাপিতঃ ২০১৮');
-define('ADDITIONAL_INFO','বিদ্যালয় কোডঃ ৮৭২১৯৮ 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	    EIIN: 127988	  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     মোবাইলঃ০১৭০৫৯২৭২৫৭');
+define('ADDITIONAL_INFO','বিদ্যালয় কোডঃ ৮৭২১৯৮ 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	    EIIN: 127988	  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     মোবাইলঃ ০১৭০৫৯২৭২৫৭');
 define('TAGLINE','Get Admitted Online');
 define('EMAIL','contact@thewebdivers.com');
 define('PREFIX','NPKKGSC');

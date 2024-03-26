@@ -18,14 +18,14 @@
             'body'=>'You don\'t have the permission to access the location!',
             'title'=>'Error',
          );
-         redirect("markEntry");
+         // redirect("markEntry");
       }elseif($class_id==""){
          $_SESSION['TOASTR_MSG']=array(
             'type'=>'error',
             'body'=>'You don\'t have the permission to access the location!',
             'title'=>'Error',
          );
-         redirect("markEntry");
+         // redirect("markEntry");
       }elseif($subject==""){
          $_SESSION['TOASTR_MSG']=array(
             'type'=>'error',
@@ -84,7 +84,7 @@
             }
          }
          $_SESSION['UPDATE']=1;
-         redirect("markEntry");
+         // redirect("markEntry");
       }else{
          //insert
          $roll_count=count($_POST['roll'])-1;
@@ -93,18 +93,18 @@
             for($i=0;$i<=intval($mark_count);$i++){
                $mark= get_safe_value($_POST['mark'][$i]);
                $roll= get_safe_value($_POST['roll'][$i]);
-               echo $meal_sql="select `mark` from `mark` where `exam_roll`='$roll' and `exam_id`='$exam_id' and `sub_id`='$subject'";
+               $meal_sql="select `mark` from `mark` where `exam_roll`='$roll' and `exam_id`='$exam_id' and `sub_id`='$subject'";
                $meal_res=mysqli_query($con,$meal_sql);
                if(mysqli_num_rows($meal_res)>0){
-                  echo $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
+                  $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
                   if(mysqli_query($con,$swl)){
-                     echo "Updated1";
+                     // echo "Updated1";
                   }
                }else{
-                  echo $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
+                  $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
                                                       ( '$subject', '$roll', '$class_id', '$mark','$exam_id','$time','','$year', '1')";
                   if(mysqli_query($con,$swl)){
-                     echo "Updated1";
+                      "Updated1";
                   }
                }
             }

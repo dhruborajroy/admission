@@ -37,7 +37,7 @@
                            <ul>
                               <li class="nav-item">
                                  <a href="profile" class="nav-link  <?php echo $profile_active?>">
-                                 <i class="feather-settings"></i> Apply
+                                 <i class="feather-settings"></i> Profile
                                  </a>
                               </li>
                               <li class="nav-item">

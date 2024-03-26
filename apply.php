@@ -11,7 +11,7 @@
    $last_name="34";
    $f_name="34";
    $m_name="34";
-   $phone_number="01705927257";
+   $phone_number="017059272".rand(11,99);
    $email="32423@dmc.c".rand(11,99);
    $class="1";
    $blood_group="A+";
@@ -106,13 +106,13 @@
                            redirect("apply-otp-verification");
                         }else{
                            $_SESSION['TOASTR_MSG']=array(
-                              'type'=>'error',
-                              'body'=>'Sms Sending error!',
-                              'title'=>'Error',
+                                 'type'=>'error',
+                                 'body'=>'Sms Sending error\!',
+                                 'title'=>'Error',
                            );
                         }
                      }else{
-                        echo $sql;
+                        // echo $sql;
                         $_SESSION['TOASTR_MSG']=array(
                            'type'=>'error',
                            'body'=>'Something Went wrong!',
@@ -135,7 +135,7 @@
          // }
       }
    }
-   ?>
+?>
 <div class="breadcrumb-bar">
    <div class="container">
       <div class="row">

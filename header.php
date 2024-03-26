@@ -92,9 +92,9 @@ if(mysqli_num_rows($res)>0){
                               <a href="dashboard">Dashboard</a>
                            </li>
                            <?php }else{?>
-                           <li>
+                           <!-- <li>
                               <a href="apply">Apply</a>
-                           </li>
+                           </li> -->
                            <li>
                               <a href="complete_payment">Complete Payment</a>
                            </li>
@@ -130,7 +130,7 @@ if(mysqli_num_rows($res)>0){
                            <a class="nav-link header-login" href="login">Login</a>
                            </li>
                         <li class="nav-item">
-                           <a class="nav-link header-sign" href="#">Contact us</a>
+                           <a class="nav-link header-sign" href="apply">Apply Now</a>
                         </li>
                      <?php }?>
                      </ul>

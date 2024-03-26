@@ -1,6 +1,5 @@
 <?php 
 session_start();
-//session_regenerate_id();
 include('../webadmin/inc/function.inc.php');
 include('../webadmin/inc/connection.inc.php');
 include('../webadmin/inc/constant.inc.php');

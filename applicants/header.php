@@ -1,10 +1,9 @@
 <?php 
    session_start();
-//    session_regenerate_id();
-   require('../webadmin/inc/constant.inc.php');
-   require('../webadmin/inc/connection.inc.php');
-   require('../webadmin/inc/function.inc.php');
-   require_once("../webadmin/inc/smtp/class.phpmailer.php");
+   require('../inc/constant.inc.php');
+   require('../inc/connection.inc.php');
+   require('../inc/function.inc.php');
+   require_once("../inc/smtp/class.phpmailer.php");
    isUSER();
 ?>
 <!doctype html>

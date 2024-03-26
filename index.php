@@ -5,9 +5,9 @@
                   <div class="col-md-7">
                      <div class="home-slide-face aos" data-aos="fade-up">
                         <div class="home-slide-text ">
-                           <h5 style="color: #fafafa;"> A prime web development and hosting company</h5>
-                           <h1 style="color:#ffffff ;">The <span style="color:#6FD6FF;">Web</span> Divers</h1>
-                           <p style="color:#ffffff;">We dive into the web to connect with the world</p>
+                           <h5 style="color: #fafafa;"> A prime Admission Management System company</h5>
+                           <h1 style="color:#ffffff ;">Get <span style="color:#6FD6FF;">Admitted</span> Online</h1>
+                           <p style="color:#ffffff;"></p>
                         </div>
                      </div>
                   </div>
@@ -32,8 +32,8 @@
                                     <img src="assets/img/pencil-icon.svg" alt="">
                                  </div>
                                  <div class="course-inner-content">
-                                    <h4><span>10</span>K</h4>
-                                    <p>Online Workshop</p>
+                                    <h4><span>10,000</span>+</h4>
+                                    <p>Online Applicants</p>
                                  </div>
                               </div>
                            </div>
@@ -47,8 +47,8 @@
                                     <img src="assets/img/cources-icon.svg" alt="">
                                  </div>
                                  <div class="course-inner-content">
-                                    <h4><span>200</span>+</h4>
-                                    <p>Expert Developer</p>
+                                    <h4><span>8,000</span>+</h4>
+                                    <p>Admitted Students</p>
                                  </div>
                               </div>
                            </div>
@@ -62,8 +62,8 @@
                                     <img src="assets/img/certificate-icon.svg" alt="">
                                  </div>
                                  <div class="course-inner-content">
-                                    <h4><span>6</span>K+</h4>
-                                    <p>Affluent Delivery</p>
+                                    <h4><span>100</span>+</h4>
+                                    <p>Schools</p>
                                  </div>
                               </div>
                            </div>
@@ -88,7 +88,8 @@
                </div>
             </div>
          </section>
-         <!-- kvm -->
+         <!-- end -->
+         <!-- start -->
          <section class="section how-it-works">
             <div class="container">
                <div class="section-header aos" data-aos="fade-up">
@@ -99,7 +100,6 @@
                </div>
                <div class="section-text aos" data-aos="fade-up">
                   <p>Our developers have devoted their life to gain expertise on different technologies. <br> They are second to none when it comes to development. </p>
-                  
                </div>
                <div class="owl-carousel mentoring-course owl-theme aos" data-aos="fade-up">
                   <div class="feature-box text-center ">

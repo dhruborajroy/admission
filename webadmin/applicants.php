@@ -44,9 +44,13 @@ $res=mysqli_query($con,$sql);
                 </div>
                 <div class="dropdown show">
                     <div class="col-12 form-group mg-t-8">
-                        <a href="../pdfreports/student-details">
+                    <a href="../pdfreports/student-details">
                                 <button type="submit"
                                 class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Print Applicant's Data</button>
+                        </a>
+                        <a href="../pdfreports/students_rank">
+                                <button type="submit"
+                                class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Generate Merit List</button>
                         </a>
                     </div>
                 </div>
@@ -80,7 +84,7 @@ $res=mysqli_query($con,$sql);
                             <td class="sorting_1 dtr-control"><?php echo $row['first_name'].' '.$row['last_name']?></td>
                             <td class="sorting_1 dtr-control"><?php echo $row['roll']?></td>
                             <td class="sorting_1 dtr-control"><?php echo $row['fName']?></td>
-                            <td class="sorting_1 dtr-control"><?php echo $row['merit']?></td>
+                            <td class="sorting_1 dtr-control"><?php echo addOrdinalNumberSuffix($row['merit'])?></td>
                             <td class="sorting_1 dtr-control"><?php echo $row['phoneNumber']?></td>
                             <td class="sorting_1 dtr-control"><?php echo $row['email']?></td>
                             <td>
