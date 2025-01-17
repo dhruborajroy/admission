@@ -21,6 +21,6 @@ if($text=='/start'){
 		$msg="This is a demo bot. Please Enter 200130 as your roll number";
 	}
 }
-$url="https://api.telegram.org/bot5316674209:AAHOJ7x4EY3dusCF7uT4MIhV-md0S3luxfU/sendMessage?text=$msg&chat_id=$chat_id&parse_mode=html";
+$url="https://api.telegram.org/api_key/sendMessage?text=$msg&chat_id=$chat_id&parse_mode=html";
 file_get_contents($url);
 ?>
