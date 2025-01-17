@@ -6,12 +6,12 @@ define('ADDITIONAL_INFO','বিদ্যালয় কোডঃ ৮৭২১৯�
 define('TAGLINE','Get Admitted Online');
 define('EMAIL','contact@thewebdivers.com');
 define('PREFIX','NPKKGSC');
-define('FRONT_SITE_PATH','http://localhost/admission/');
-define('STORE_ID',"thewe630883975551e");
-define('STORE_PASSWORD',"thewe630883975551e@ssl");
+define('FRONT_SITE_PATH','http://'.$_SERVER['HTTP_HOST']."/admission");
+
 define('STUDENT_IMAGE',FRONT_SITE_PATH."/media/users/");
 define('UPLOAD_APPLICANT_IMAGE',$_SERVER['DOCUMENT_ROOT']."/admission/media/users/");
 define('UPLOAD_STUDENT_IMAGE',$_SERVER['DOCUMENT_ROOT']."/admission/media/users/");
+
 // Bkash Test Constants
 define("APP_KEY","4f6o0cjiki2rfm34kfdadl1eqq");
 define("APP_SECRET","2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b");

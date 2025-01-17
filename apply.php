@@ -489,7 +489,7 @@
                               <table class="table table-bordered" style="width:40%;margin:0 auto;">
                               <tr>
                                     <td style="width:10%;" align="center">
-                                       <img src="<?php echo FRONT_SITE_PATH?>webadmin/ajax/captcha_gen.php?captchaCode=<?php 
+                                       <img src="<?php echo FRONT_SITE_PATH?>/webadmin/ajax/captcha_gen.php?captchaCode=<?php 
                                                       $random_alpha = md5(rand()); //generation of random string
                                                       /** Genrate a captcha of length 6 */
                                                       $captcha_code = substr($random_alpha, 0, 6);

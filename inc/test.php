@@ -16,9 +16,11 @@ $html="Parthib's Result <br>
 // send_email("Dhruborajroy3@gmail.com",$html,"Result");
 // send_email("dhruborajroy3@gmail.com",'Your account has been created. ','Account Created');
 echo "<pre>";
-pr($_SESSION['MOBILE_OTP']);
-pr($_SESSION['EMAIL_OTP']);
-pr($_SESSION['FORGOT_PASSWORD']);
+pr("Mobile ".$_SESSION['MOBILE_OTP']);
+pr("Email ".$_SESSION['EMAIL_OTP']);
+pr("Forget pass ".$_SESSION['FORGOT_PASSWORD']);
+pr($_SERVER);
+
 // $grandToken=grandToken();
 // $user_data=['tran_id'=>'ssdn','amount'=>1];
 // $createPayment=createPayment($grandToken['id_token'],$user_data);
