@@ -61,7 +61,7 @@ function send_email($email,$html,$subject,$attachment=""){
 	$mail->SMTPAuth=true;
     $mail->Username="dhrubo.bec.ce04@gmail.com";
     $mail->Password="dqfiqswgsfjmhshn";
-    // $mail->setFrom('hackerdhrubo99@gmail.com', 'Dhrubo');
+    $mail->setFrom('dhrubo.bec.ce04@gmail.com', 'Dhrubo');
 	$mail->addAddress($email);
 	$mail->IsHTML(true);
 	$mail->Subject=$subject;
@@ -525,7 +525,7 @@ function createPayment($id_token,$user_data){
         'amount' => $user_data['amount'],
         'currency' => 'BDT',
         'intent' => 'sale',
-        'payerReference' => '01770618575',
+        'payerReference' => '01619777283',
         'merchantInvoiceNumber' => $user_data['tran_id'],
         'callbackURL' => $callbackURL
     );

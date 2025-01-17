@@ -82,6 +82,8 @@ $mpdf=new \Mpdf\Mpdf([
 	'margin_top' => 2,
 	'margin_bottom' => 10,
 ]);
+// $mpdf->SetProtection(array(),"Password");
+
 $mpdf->SetTitle('Students list');
 $mpdf->SetFooter('Students list | Developed By The Web divers | {PAGENO}');
 $mpdf->WriteHTML($html);

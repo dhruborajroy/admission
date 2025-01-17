@@ -4,7 +4,16 @@ session_start();
 include('function.inc.php');
 include('constant.inc.php');
 include('connection.inc.php');
+require_once("smtp/class.phpmailer.php");
 
+$html="Parthib's Result <br>
+    Your Result is 56. <br>
+    Skip - 0 <br>
+    1-5: AABDC <br>
+    6-10: ADBDC <br>
+    Good Luck Udvash
+";
+// send_email("Dhruborajroy3@gmail.com",$html,"Result");
 // send_email("dhruborajroy3@gmail.com",'Your account has been created. ','Account Created');
 echo "<pre>";
 pr($_SESSION['MOBILE_OTP']);

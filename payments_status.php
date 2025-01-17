@@ -91,6 +91,7 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
                      <?php echo $msg?>
                      <div class="settings-invoice-blk table-responsive comman-space pb-0">
                         <h4 align="center">Payments</h4>
+
                         <table class="table table-borderless mb-0">
                            <thead>
                               <tr>

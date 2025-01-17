@@ -55,6 +55,7 @@ if(mysqli_num_rows($res)>0){
       <link rel="stylesheet" href="assets/css/toastr.min.css">
       <link rel="stylesheet" href="assets/css/datepicker.min.css">
       <link rel="stylesheet" href="assets/css/style.css">
+
    </head>
    <body class="pop-modal">
       <div class="main-wrapper pop-modal" >
