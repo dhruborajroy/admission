@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2025 at 08:55 AM
+-- Generation Time: Jul 05, 2025 at 10:28 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.29
 
@@ -88,11 +88,14 @@ CREATE TABLE `applicants` (
 --
 
 INSERT INTO `applicants` (`id`, `first_name`, `last_name`, `roll`, `class`, `fName`, `fNid`, `mName`, `mNid`, `phoneNumber`, `presentAddress`, `permanentAddress`, `dob`, `gender`, `religion`, `birthId`, `quota`, `bloodGroup`, `examRoll`, `merit`, `localGuardianName`, `localGuardianNid`, `password`, `email`, `code`, `image`, `final_submit`, `last_notification`, `status`) VALUES
-('NPKKGSC3B0F', '1', '34', '257112', '1', '34', '23', '34', '23', '01705927283', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '257112', '', 'sf', 'sf', '414070', '32423@dmc.c61', '153601', '1737100457.jpg', 0, '', 1),
+('NPKKGSC0B81', '1', '34', '252554', '1', '34', '23', '34', '23', '01705927243', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '252554', '5', 'sf', 'sf', '412852', '32423@dmc.c56', '855606', '1751702243.jpg', 0, '', 1),
+('NPKKGSC3B0F', '1', '34', '257112', '1', '34', '23', '34', '23', '01705927283', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '257112', '6', 'sf', 'sf', '414070', '32423@dmc.c61', '153601', '1737100457.jpg', 0, '', 1),
 ('NPKKGSC7F6E', '1', '34', '248643', '1', '34', '23', '34', '23', '01705927268', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '248643', '4', 'sf', 'sf', '233649', '32423@dmc.c93', '546537', '1721926420.jpg', 1, '', 1),
 ('NPKKGSC8664', 'Dhrubo', 'Raj Roy', '241272', '1', '34', '23', '34', '23', '01705927257', 'Bhola Barishal Highway', 'Durgapur', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '241272', '2', 'sf', 'sf', '287184', 'Dhruborajroy3@gmail.com', '594871', '1711440357.jpg', 0, '', 1),
 ('NPKKGSC8665', 'Dhrubo', 'Raj Roy', '241271', '1', '34', '23', '34', '23', '01705927258', 'Bhola Barishal Highway', 'Durgapur', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '241271', '3', 'sf', 'sf', '287184', 'Dhruborajroy3@gmail.com', '594871', '1711440357.jpg', 1, '', 1),
-('NPKKGSC8BC8', '1', '34', '247996', '1', '34', '23', '34', '23', '01705927224', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '247996', '1', 'sf', 'sf', '401652', '32423@dmc.c78', '890144', '1711805581.jpg', 1, '', 1);
+('NPKKGSC8BC8', '1', '34', '247996', '1', '34', '23', '34', '23', '01705927224', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '247996', '1', 'sf', 'sf', '401652', '32423@dmc.c78', '890144', '1711805581.jpg', 1, '', 1),
+('NPKKGSCEA99', '1', '34', '255285', '1', '34', '23', '34', '23', '01705927298', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '255285', '7', 'sf', 'sf', '348128', '32423@dmc.c77', '329175', '1751702123.jpg', 1, '', 1),
+('NPKKGSCFEB3', '1', '34', '252335', '1', '34', '23', '34', '23', '01705927259', 'wij', 'sdkm', '30/11/2023', 'Male', 'Hinduism', '234', 'N/A', 'A+', '252335', '', 'sf', 'sf', '481975', '32423@dmc.c85', '963772', '1751702596.jpg', 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +120,7 @@ CREATE TABLE `bkash_credentials` (
 --
 
 INSERT INTO `bkash_credentials` (`id`, `app_key`, `app_secret`, `username`, `password`, `base_url`, `id_token`, `refresh_token`, `time`) VALUES
-(1, '4f6o0cjiki2rfm34kfdadl1eqq', '2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b', 'sandboxTokenizedUser02', 'sandboxTokenizedUser02@12345', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta', 'eyJraWQiOiJvTVJzNU9ZY0wrUnRXQ2o3ZEJtdlc5VDBEcytrckw5M1NzY0VqUzlERXVzPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJlODNlMDkwMC1jY2ZmLTQzYTctODhiNy0wNjE5NDJkMTVmOTYiLCJhdWQiOiI2cDdhcWVzZmljZTAxazltNWdxZTJhMGlhaCIsImV2ZW50X2lkIjoiYzljZTM4NzAtOTM4YS00ZTk2LWE4NzEtMGE5ZTdmYjI3MGI4IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3MzcxMDA0MDYsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV9yYTNuUFkzSlMiLCJjb2duaXRvOnVzZXJuYW1lIjoic2FuZGJveFRva2VuaXplZFVzZXIwMiIsImV4cCI6MTczNzEwNDAwNiwiaWF0IjoxNzM3MTAwNDA2fQ.VBDUO11f1Ko7ecHQJasElp8Y2KlSvtV8O-Uj9cB3CMTgYmnRTLIaL44cLwIJWk0ZEAOmavY22FIaneCHasQLEDqbpPB-DhFxpQycb8omnzRiIIzHjSk0Kw-YpPIPj0I9TzEEoqFBS1ONIjgE3-FJhIdLIPw-awi8423U8F7o8_13a-Sk7ODUbkPHlwd0q6AXeCnt0DsffWaRQGvZj8NwWgboXzGMorwvaCglsa9c1b5DaocYWs_j-4zBuPbMNhnsmZul0A8zwh7iuhPL5T4HV1sLITRKh7_dd_Z8zp1Y-N5Hz7Lg9G_V3rJ5Nv0Npa1LuY0CMJsuyZAhDIv44WbRNA', 'eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.G0iIbWXm27HyxJy_FuTlCs1dOF4kYN4OMJdmob663wkzFbeRF7wneSVk0yEVawDhIKeonYHisTWeS_ysHLWfC0CMpKr31JD1gYIBYfCH6QLWygvJp8L62OB_lKXZHjozaAYZFFDBo2bXdhRVOXWdUU6JFJFSuFmfd9dJO6R_BByenOpSdlUFzBeFsCryYLiurWjbhmo8TVb29BquOWc57W-0Ro8mC_olTzWUadF7USPAZ7ZYmrRJ-LKzvRuGWGT3LCydMCcFeKe9SKxpKESCUYdORAANLbQKrqfxGRciVubLRdjnv-SrvWvn3ec--2GQjb-RoVZ4tc0YNIdpLBjsgQ.hbAnoFJUXmP10fki.PsN45Cmb51iA2jdNByO0uK2qCgMYKU6If2_aFJfkgnAYD781jpYJDWsixICfPzCiR7KXlyKsx96e8jE976T_TXfGOF7NsHrAUocCWqzPpnlX_pBWz8_r349sat_cBQRKiq7jp6w2DgDT0QD_9WRXHfVKVH54MBsov7Mh8b_py1l3xxNHA7jms4i2SYcOuCknh8hoRx7faVKB6nARFQzN0MNX7YcwZwPgzuE1CysHe6UdhG7QJMy5b2GFiumVR9hKq0C4z2XwesVtn5m59BJ6Lpe9firtniHzkBwUZXN0rjcXgkOTHPB8c04KhKFawna6tm_Z7ktymV1h25mtkfNpfK3PNx6c_rqpFmCCo-yrqiZ2aXfcR3osNRjoZYkk4nDtOvKahHY76hJrZ2PpzdH_qvStoqRpbESR6sKZtHeHVFC8jHCrcNALj8OYYfi33x0WtPgk4_MMu0rEC-uQkCAebJEiE-EP9naGVGFk5vLnPGWsKWCJgWPSG09ci-CyH1DO0TEskbqIexjam1GAur7xoIN6g_EcgAH4iGeDWrfC_XQXFo4bjijadoEUNj6X4nfkPRsfpJgGVvc37d4VaUqVIgO5J7m2qKK382DOxKHf3Ydd7KALq6z3_Ujz4MY1emLFAH3UkdAtWjEjWZt-rbKKLQyjNGfWuyUQ8tGx4NzjMYsM_d_JS1TVHt0ROa4wlizYbBYXLcoaIQ6MsdyQYnCUGO3vd2uNCpJDBQMWvClats8xV3kWTyzIKDANu746f0zqE36HhYfOeWLZdx8WRIo_dMkbK-H6oLaI1sVa9bKkrL-VcUcZrjWCPxeSbiHPn44Vxf4kNJpusSsLZ7fGV2aJoTylJgBs8fC39su0nmc0GTyfSrT86RvB4zJyXvXrtislFmC0um_7lRGHk65BCHFEHNS1hShHQVPtsdjhzsVa5eRqYCfgJXWkfcYy3-27NxJbdQGwfaqyficq_wW1260l3C2ZKYjGXK2h7yutdvhv0xc1RunnJA2ukV4NHqB65gRJXnkjuLqaxYilCoXplXWK0pNsv0UQHsp8skF75AsCYqpYo5WRqqZclzvXqMzrnohLZwfKA3oAvtM3RJI_ebqtaXh7lxvzu0dx8zgJZyP1rH7a18dvz4lqCCxRAJDGf9iumDyB4Om7Lzk2zuKMBlZygUtNbahDooqYlH7oAS6QqHU5VN9zz7c0yMrJlW0GsZ6-T6Zlji13AXMir98N19nnzyTvGYwd2nrLsvgfr5cXm2tXtlG1wMnZXGeJmXpvndcvuq6BU2GkSOKqRCQRZsGU7j859tTrVK6mdMrTZoTPR2r9h1ThkCA.5lNzy0CJL_Yj99mNe-5-SA', '1737100485');
+(1, '4f6o0cjiki2rfm34kfdadl1eqq', '2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b', 'sandboxTokenizedUser02', 'sandboxTokenizedUser02@12345', 'https://tokenized.sandbox.bka.sh/v1.2.0-beta', 'eyJraWQiOiJvTVJzNU9ZY0wrUnRXQ2o3ZEJtdlc5VDBEcytrckw5M1NzY0VqUzlERXVzPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJlODNlMDkwMC1jY2ZmLTQzYTctODhiNy0wNjE5NDJkMTVmOTYiLCJhdWQiOiI2cDdhcWVzZmljZTAxazltNWdxZTJhMGlhaCIsImV2ZW50X2lkIjoiYjMxZmU1NDEtNTU1OC00MWRjLWE3OWQtMTFjNDAwYjkxYWNkIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE3NTE3MDIwNjAsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMV9yYTNuUFkzSlMiLCJjb2duaXRvOnVzZXJuYW1lIjoic2FuZGJveFRva2VuaXplZFVzZXIwMiIsImV4cCI6MTc1MTcwNTY2MCwiaWF0IjoxNzUxNzAyMDYwfQ.UwwGGhn4y6Qf--3qmyvWgte12n2bgt3-XTI-TQLsyccxcMNahq3q4RkkHll4Vex4ztqc2fHoQEKGRmhs-4xga7HhKRdhAAf3F3H-vwHQekfeU6u6DPzRJkSxrhYtxNkv5rhRlKXhJo-Jioo8EI-2w4Yh529WMN1QU_P0py9W5aVEfpHdaObrXRimFiR0L2-Z6zKs7XNJNIy4BDbbR6TH9fteTxXKoqS_ArAF_2NTac-_DxVQosNl8xpG-frDTLqWvsffKuV6IB6lEbrkzrw1oor6HOoOHI6OnTw9R04LgX8tvwY4Jsu87W_ox4jlyJjEhfNOpFag_txGEVuXqsLUVg', 'eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.RbgNYpQUMNgAFiw6Rtv_vjUAODS3slZs5N3vOVu5dKZoyU3_P07Kd8ZgDuUisKI-zNp-v7-XHOeAT-WOACnm-HVjjij8LFWB_R6c-b9iCmO-ku9XCkOJRlZC5Uyiz3WA6NNi6DMnkG-ZXYDVA_6sNj74y8EBClu5zsqDUrFKjr2bxKYMIvzdAy94KWftx0QXfW_HcDDimtPQF7lphuDB5M88kggUs7-QF3_AP3M4uCHJvSeQUQDMrWC3ySSefDpRyM8L9zQSlcledwQnc7etauRPki3N3HaSHzBKxUnf2sWzzSazeMSv0owpp2ipVcWteUE459lWHUgiMPqcNKZhOw.Qk86eNRK9BeVN1m2.hncRo55sDAunbAh5cNtm3iPotpp3y2Gu8xQ1tmeeuU8AAQmqd0nHqgLWCOJ6OzE3FWeclGQfht8K8-Yh_6YgmkP_B60Gt01h-zO7EPTbBrQuEVO6elixVG-FacZ83vcKqcNSSOwsdw-Rt7F1PR9iinhQCIB3V_wZG3loToL_LfTO6A1o0G0NRutSoTBQTlDFRvEbCUx3HnFwrbtx59eKrql21vLINL8R21oh0S9nnhlpZtUx-qusEFf_DvVSGBAoVXEOoVYGNnXeoaggfnrFjo1noNrVFJEzRzCk8jFUt-O6J8ZqNvnk7txLXzY8fbuOPYtOtWySbO3AsXkpxqb3gL9zPM4jEndo_afYek26JzcKbkMZ9ThB_8ynxvs3yj4DPFY1L1ItXM4uRoK8TZdssffMjVOWAEOeiCclhVzeoC_w5fjOBbGmHGOh4kqMP13sRQzE3eZ6I4VF5QKEEF-5E7vMbmGTe_CWNmX9CE9PCS6bebSnbHj2hfyEtNz1kMXbv7fci2a8O6YBfKHHgKSAnGXgsFTp9mW1O0-cMnsO6yNqBYlb9RE1-VMdG91VZ0KbeeuzNusfbgK4jZDWj9_VLIyH9jE9eaSezgTJMLuEoGtVnDkoHzDCIHle_iubsiJxipcdWgq2cEAMJ5rAVKCp6h_A9XIc1hRceSXGI3VoYwy8x0KX8DTyEyjJW4zSAALfz5ea748cIn5ijWui758-VIhiDol2bdVSUxBulgYhk8OVQTjSBdGkxNhHp6N8uKDMhfTEFyBl2IY9VbT4WyNcBXw5slpOSuiz8YhM8pYCtu5s4Ajnyw3bBQVQwDIJ3iKUrild3CjueabtJt8hptboJc2LSyj08hqWgY_AtB-HgOOQyP81YdSv9Fn38YZRODnGevD7YY2AH4Uv43H0AgcRiMis4R5WKA_qBp8IcvNFA5gxbva-z6FEHeOLPyIm2iP4qBen1cE5BUQajgYNp5Ud-8xiSWRH09qMi8bDBCjELU7q802WHnUSOYVjfjFK9L6S7B4ANumhoOOYi3ypuvjnz-8bLBYaerOD7LKO785TPs3jshetceSTBf9azhUZ3p_wIXCcMBvxJhblu9JT2a7JnlAThGgMuu475_gBH3v5DesEQdGak8w-CPRZ4_ElqIdA4dvPzTeJy1SnCRMiMU5siC4Vtfez6qzeOXy9Sl1eP2jJaO-yM6ritBM028TNVXgN5VlZCK_65VIre4uPoLh_yrvQ343jRQseUt839erRXidUlcpAA2-xIkPVRUDNmLWFysGfI7JuMdnDprPoX-_TGRrYOytFPYGpQ5GAHDAsaH-kY-aiVgs.haM6a1UbsMWpgXCXtS-9iA', '1751702153');
 
 -- --------------------------------------------------------
 
@@ -150,7 +153,11 @@ INSERT INTO `bkash_online_payment` (`id`, `tran_id`, `user_id`, `bkash_payment_i
 (4, 'admission_6603a8e4bbae2', 'NPKKGSC8664', 'TR0011DDR5j3s1711515826480', '', '', 320, '', '2024-03-27T11:03:46:480 GMT+0600', '', 'pending'),
 (5, 'admission_660814c6dc309', 'NPKKGSC8BC8', 'TR0011ifkwfRK1711805638739', '01619777283', 'BCU80IBDSI', 320, 'Successful', '2024-03-30T19:33:58:739 GMT+0600', '1711805662', 'Completed'),
 (6, 'admission_66a2836954429', 'NPKKGSC7F6E', 'TR0011c1IAX8m1721926343903', '01619777283', 'BGP40JZRXA', 320, 'Successful', '2024-07-25T22:52:23:903 GMT+0600', '1721926526', 'Completed'),
-(7, 'admission_678a0cc75af64', 'NPKKGSC3B0F', 'TR0011PyZFoi61737100407058', '', '', 320, 'OTP was not valid', '2025-01-17T13:53:27:058 GMT+0600', '1737100505', 'failure');
+(7, 'admission_678a0cc75af64', 'NPKKGSC3B0F', 'TR0011PyZFoi61737100407058', '', '', 320, 'OTP was not valid', '2025-01-17T13:53:27:058 GMT+0600', '1737100505', 'failure'),
+(8, 'admission_6868da8aa98b9', 'NPKKGSCEA99', 'TR0011LS7d0dg1751702060707', '', '', 320, 'OTP was not valid', '2025-07-05T13:54:20:707 GMT+0600', '1751702175', 'failure'),
+(9, 'admission_6868db335cec5', 'NPKKGSC0B81', 'TR0011CfiGxX01751702229397', '', '', 320, 'OTP was not valid', '2025-07-05T13:57:09:397 GMT+0600', '1751702333', 'failure'),
+(10, 'admission_6868dc5a8cffe', 'NPKKGSCFEB3', 'TR0011l7QdIs21751702524716', '', '', 320, 'OTP was not valid', '2025-07-05T14:02:04:716 GMT+0600', '1751702657', 'failure'),
+(11, 'admission_6868df6aea908', 'NPKKGSCEA99', 'TR0011022jPhe1751703308999', '01770618575', 'CG500N2OI8', 320, 'Successful', '2025-07-05T14:15:08:999 GMT+0600', '1751703428', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -225,7 +232,16 @@ INSERT INTO `mark` (`id`, `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, 
 (9, '4', '241272', '1', '56', '1', '2023', '1711805853', '', 1),
 (10, '1', '248643', '1', '77', '1', '2023', '1721926723', '', 1),
 (11, '3', '248643', '1', '7', '1', '2023', '1721926730', '', 1),
-(12, '4', '248643', '1', '55', '1', '2023', '1721926739', '', 1);
+(12, '4', '248643', '1', '55', '1', '2023', '1721926739', '', 1),
+(13, '1', '255285', '1', '44', '1', '2023', '1751702449', '', 1),
+(14, '1', '257112', '1', '44', '1', '2023', '1751702449', '', 1),
+(15, '1', '252554', '1', '44', '1', '2023', '1751702449', '', 1),
+(16, '3', '255285', '1', '34', '1', '2023', '1751702457', '', 1),
+(17, '3', '257112', '1', '34', '1', '2023', '1751702457', '', 1),
+(18, '3', '252554', '1', '32', '1', '2023', '1751702457', '', 1),
+(19, '4', '255285', '1', '21', '1', '2023', '1751702466', '', 1),
+(20, '4', '257112', '1', '32', '1', '2023', '1751702466', '', 1),
+(21, '4', '252554', '1', '43', '1', '2023', '1751702466', '', 1);
 
 -- --------------------------------------------------------
 
@@ -243,6 +259,13 @@ CREATE TABLE `notice` (
   `user_id` varchar(11) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notice`
+--
+
+INSERT INTO `notice` (`id`, `title`, `details`, `reference`, `added_on`, `updated_on`, `user_id`, `status`) VALUES
+('6868e0b149f09', 'সদফ', '<p>সদফকঙ্ক&nbsp;</p>', 'test', '1751703729', '', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -425,7 +448,7 @@ ALTER TABLE `bkash_credentials`
 -- AUTO_INCREMENT for table `bkash_online_payment`
 --
 ALTER TABLE `bkash_online_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `class`
@@ -443,7 +466,7 @@ ALTER TABLE `exam`
 -- AUTO_INCREMENT for table `mark`
 --
 ALTER TABLE `mark`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `refund_payment`
