@@ -19,7 +19,7 @@ if(isset($_GET['type']) && $_GET['type']!=='' && isset($_GET['id']) && $_GET['id
 	}
 
 }
-$sql="select * from applicants order by id desc";
+$sql="select applicants.*,bkash_online_payment.user_id from applicants,bkash_online_payment where bkash_online_payment.user_id=applicants.id and bkash_online_payment.status='Completed' order by id desc";
 $res=mysqli_query($con,$sql);
 ?>
 <!-- Page Area Start Here -->
@@ -48,7 +48,7 @@ $res=mysqli_query($con,$sql);
                                 <button type="submit"
                                 class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Print Applicant's Data</button>
                         </a>
-                        <a href="../pdfreports/students_rank">
+                        <a href="../pdfreports/generate_rank">
                                 <button type="submit"
                                 class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Generate Merit List</button>
                         </a>

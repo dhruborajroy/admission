@@ -17,6 +17,7 @@ if (isset($_GET['class']) && $_GET['class']!="") {
     // $_SESSION['PERMISSION_ERROR']=1;
     // redirect("index.php");
 }
+$html="";
 $html.='<table width="100%"  id="new-page">
 <tr >
    <td colspan="8" align="center" style="font-size:36px">'.NAME_BANGLA.'</td>
@@ -40,6 +41,7 @@ $html.='<tr align="center">
         <td style="border: 1px solid black;border-collapse: collapse;background-color: #b7b4b4;text-align:center;">Phone Number</td>
     </tr>';
     $additional_sql="";
+    $additional_sql2="";
     if($class!=""){
         $additional_sql="where `class`='$class'";
         if($limit!=""){
@@ -72,20 +74,20 @@ $html.='<tr align="center">
     }//else ended
 $html.='</table>';
 
-// echo $html;
-$mpdf=new \Mpdf\Mpdf([
-    'tempDir' => __DIR__ . '/custom/temp/dir/path',
-    'default_font_size' => 12,
-    'default_font' => 'FreeSerif',
-	'margin_left' => 5,
-	'margin_right' => 5,
-	'margin_top' => 2,
-	'margin_bottom' => 10,
-]);
-// $mpdf->SetProtection(array(),"Password");
+echo $html;
+// $mpdf=new \Mpdf\Mpdf([
+//     'tempDir' => __DIR__ . '/custom/temp/dir/path',
+//     'default_font_size' => 12,
+//     'default_font' => 'FreeSerif',
+// 	'margin_left' => 5,
+// 	'margin_right' => 5,
+// 	'margin_top' => 2,
+// 	'margin_bottom' => 10,
+// ]);
+// // $mpdf->SetProtection(array(),"Password");
 
-$mpdf->SetTitle('Students list');
-$mpdf->SetFooter('Students list | Developed By The Web divers | {PAGENO}');
-$mpdf->WriteHTML($html);
-$file=time().'.pdf';
-$mpdf->output($file,'I');
+// $mpdf->SetTitle('Students list');
+// $mpdf->SetFooter('Students list | Developed By The Web divers | {PAGENO}');
+// $mpdf->WriteHTML($html);
+// $file=time().'.pdf';
+// $mpdf->output($file,'I');

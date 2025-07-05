@@ -15,9 +15,10 @@ $msg="";
         $exam_roll=$row['exam_roll'];
         $rank_sql="update applicants set merit='$i' where examRoll='$exam_roll'";
         if(mysqli_query($con,$rank_sql)){
-            echo "Rank Generated";
+            
         }
         $i++;
     }
+    redirect("../pdfreports/students_rank");
 // }
 ?>

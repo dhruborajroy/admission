@@ -304,16 +304,22 @@ function getMealRate($month_id){
 }
 
 function addOrdinalNumberSuffix($num) {
-    if (!in_array(($num % 100),array(11,12,13))){
-      switch ($num % 10) {
-        // Handle 1st, 2nd, 3rd
-        case 1:  return $num.'<sup>st</sup>';
-        case 2:  return $num.'<sup>nd</sup>';
-        case 3:  return $num.'<sup>rd</sup>';
-      }
+    if (!is_numeric($num) || $num < 1) {
+        return $num;
+    }
+
+    $num = (int)$num; // Cast to integer
+
+    if (!in_array(($num % 100), array(11,12,13))){
+        switch ($num % 10) {
+            case 1:  return $num.'<sup>st</sup>';
+            case 2:  return $num.'<sup>nd</sup>';
+            case 3:  return $num.'<sup>rd</sup>';
+        }
     }
     return $num.'<sup>th</sup>';
 }
+
 
 function numberTowords($num){
     $ones = array(
@@ -519,7 +525,7 @@ function refreshToken($refresh_token){
 }
 
 function createPayment($id_token,$user_data){
-    $callbackURL=trim(FRONT_SITE_PATH.'executePayment.php');
+    $callbackURL=trim(FRONT_SITE_PATH.'/executePayment.php');
     $requestbody = array(
         'mode' => '0011',
         'amount' => $user_data['amount'],
