@@ -26,7 +26,7 @@ include('header.php');?>
             <div class="col-6">
                <div class="item-content">
                   <div class="item-title">Applicants</div>
-                  <div class="item-number"><span class="counter" data-num="<?php echo $students=gettotalstudent()?>"><?php echo $students?></span></div>
+                  <div class="item-number"><span class="counter" data-num="<?php echo $students=gettotalstudent()?>"><?php echo $students?><?php echo $FORM_AMOUNT?></span></div>
                </div>
             </div>
          </div>

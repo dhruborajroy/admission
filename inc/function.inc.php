@@ -435,36 +435,56 @@ function form_csrf(){
     "pin":"12121"
 */
 // Bkash Functions Starts here
+
+$res=mysqli_query($con,"select * from `bkash_credentials` where id='1'");
+if(mysqli_num_rows($res)>0){
+    $row=mysqli_fetch_assoc($res);
+    $username=$row['username'];
+    $password=$row['password'];
+    $app_key=$row['app_key'];
+    $app_secret=$row['app_secret'];
+    $base_url=$row['base_url'];
+    $form_amount=$row['amount'];
+}else{
+    echo "Payment Processor not working";
+}
+// Bkash Test Constants
+// define("APP_KEY","4f6o0cjiki2rfm34kfdadl1eqq");
+// define("APP_SECRET","2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b");
+// define("USERNAME","sandboxTokenizedUser02");
+// define("PASSWORD","sandboxTokenizedUser02@12345");
+// define("BASE_URL",'https://tokenized.sandbox.bka.sh/v1.2.0-beta');
+// define("FORM_AMOUNT",320);
+// define("SERVICE_CHARGE",0);
+//Bkash live credentials
+
+define("APP_KEY",$app_key);
+define("APP_SECRET",$app_secret);
+define("USERNAME",$username);
+define("PASSWORD",$password);
+define("BASE_URL",$base_url);
+define("FORM_AMOUNT",$form_amount);
+define("SERVICE_CHARGE",0);
+
+
 function timeWiseTokenGeneartion(){
     global $con;
-    $sql="select time from bkash_credentials where id='1' limit 1";
+    $data=grandToken();
+    // pr($data);
+    $id_token=$data['id_token'];
+    $refresh_token=$data['refresh_token'];
+    $sql="update bkash_credentials set id_token='$id_token', refresh_token='$refresh_token'  where id='1'";
     $res=mysqli_query($con,$sql);
-    if(mysqli_num_rows($res)>0){
-        $row=mysqli_fetch_assoc($res);
-        $time=$row['time'];
-        if($time==""){
-            $time=0;
-        }
-        if((time()-$time)>3600){
-            $time=time();
-            $data=grandToken();
-            $id_token=$data['id_token'];
-            $refresh_token=$data['refresh_token'];
-            $sql="update bkash_credentials set id_token='$id_token', refresh_token='$refresh_token',  time='$time'  where id='1'";
-            $res=mysqli_query($con,$sql);
-        }
-        $sql="select * from bkash_credentials where id='1' limit 1";
-        $res=mysqli_query($con,$sql);
-        $row=mysqli_fetch_assoc($res);
-        $data=array(
-            'id_token'=>$row['id_token'],
-            'refresh_token'=>$row['refresh_token'],
-            'time'=>$time,
-        );
-        return $data;
-    }else{
-        return "error";
-    }
+    
+    $sql="select * from bkash_credentials where id='1' limit 1";
+    $res=mysqli_query($con,$sql);
+    $row=mysqli_fetch_assoc($res);
+    $data=array(
+        'id_token'=>$row['id_token'],
+        'refresh_token'=>$row['refresh_token'],
+        // 'time'=>$time,
+    );
+    return $data;
 }
 
 function grandToken(){
@@ -531,7 +551,7 @@ function createPayment($id_token,$user_data){
         'amount' => $user_data['amount'],
         'currency' => 'BDT',
         'intent' => 'sale',
-        'payerReference' => '01619777283',
+        'payerReference' => '01705927257',
         'merchantInvoiceNumber' => $user_data['tran_id'],
         'callbackURL' => $callbackURL
     );
@@ -602,7 +622,7 @@ function queryPayment($paymentID,$id_token){
 }
 
 function refundPayment($id_token,$trxID,$data){
-    $callbackURL='http://thewebdivers.com/';
+    $callbackURL=BASE_URL;
     $requestbody = array(
         'paymentID' => $data['paymentID'],
         'amount'=>$data['amount'],

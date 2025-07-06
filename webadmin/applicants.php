@@ -48,7 +48,7 @@ $res=mysqli_query($con,$sql);
                                 <button type="submit"
                                 class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Print Applicant's Data</button>
                         </a>
-                        <a href="../pdfreports/generate_rank">
+                        <a href="generate_rank">
                                 <button type="submit"
                                 class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Generate Merit List</button>
                         </a>

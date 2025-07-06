@@ -51,69 +51,101 @@
       );
       // redirect("markEntry");
    }
+   if(isset($_POST['submit'])){
+    $year = get_safe_value($_POST['year']);
+    $subject = get_safe_value($_POST['subject']);
+    $class_id = get_safe_value($_POST['class']);
+    $exam_id = get_safe_value($_POST['exam']);
+    $time = date('Y-m-d H:i:s');
+
+    $roll_count = count($_POST['roll']);
+
+    for($i = 0; $i < $roll_count; $i++){
+        $roll = get_safe_value($_POST['roll'][$i]);
+        $mark = get_safe_value($_POST['mark'][$i]);
+
+        // Check if mark already exists for this student, exam, and subject
+        $check_sql = "SELECT `mark` FROM `mark` WHERE `exam_roll`='$roll' AND `exam_id`='$exam_id' AND `sub_id`='$subject' AND class_id='$class_id' AND year='$year'";
+        $check_res = mysqli_query($con, $check_sql);
+
+        if(mysqli_num_rows($check_res) > 0){
+            // Update existing mark
+            $update_sql = "UPDATE `mark` SET `mark` = '$mark', `updated_on`='$time' 
+                           WHERE `exam_roll` = '$roll' AND class_id='$class_id' 
+                           AND exam_id='$exam_id' AND sub_id='$subject' AND year='$year'";
+            mysqli_query($con, $update_sql);
+        } else {
+            // Insert new mark
+            $insert_sql = "INSERT INTO `mark` (`sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`, `updated_on`, `year`, `status`) 
+                           VALUES ('$subject', '$roll', '$class_id', '$mark', '$exam_id', '$time', '', '$year', '1')";
+            mysqli_query($con, $insert_sql);
+        }
+    }
+
+    $_SESSION['UPDATE'] = 1;
+   //  redirect("markEntry"); // Uncomment when ready
+}
+
+   // if(isset($_POST['submit']) ){
+   //    $year=get_safe_value($_POST['year']);
+   //    $subject=get_safe_value($_POST['subject']);
+   //    $class_id=get_safe_value($_POST['class']);
+   //    $exam_id=get_safe_value($_POST['exam']);
+   //    $meal_sql="select `mark` from `mark` where sub_id='$subject' and class_id='$class_id'";
+   //    $meal_res=mysqli_query($con,$meal_sql);
+   //    if(mysqli_num_rows($meal_res)>0){
+   //       //update
+   //       $roll_count=count($_POST['roll'])-1;
+   //       $mark_count=count($_POST['mark'])-1;
+   //       for($i=0;$i<=intval($roll_count);$i++){
+   //          for($i=0;$i<=intval($mark_count);$i++){
+   //             $mark= get_safe_value($_POST['mark'][$i]);
+   //             $roll= get_safe_value($_POST['roll'][$i]);
+   //             $meal_sql="select `mark` from `mark` where `exam_roll`='$roll' and `exam_id`='$exam_id' and `sub_id`='$subject'";
+   //             $meal_res=mysqli_query($con,$meal_sql);
+   //             if(mysqli_num_rows($meal_res)>0){
+   //                $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
+   //                if(mysqli_query($con,$swl)){
+   //                   // echo "Updated1";
+   //                }
+   //             }else{
+   //                $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
+   //                                                    ( '$subject', '$roll', '$class_id', '$mark','$exam_id','$time','','$year', '1')";
+   //                if(mysqli_query($con,$swl)){
+   //                   // echo "Updated1";
+   //                }
+   //             }
+   //          }
+   //       }
+   //       $_SESSION['UPDATE']=1;
+   //       // redirect("markEntry");
+   //    }else{
+   //       //insert
+   //       $roll_count=count($_POST['roll'])-1;
+   //       $mark_count=count($_POST['mark'])-1;
+   //       for($i=0;$i<=intval($roll_count);$i++){
+   //          for($i=0;$i<=intval($mark_count);$i++){
+   //             $mark= get_safe_value($_POST['mark'][$i]);
+   //             $roll= get_safe_value($_POST['roll'][$i]);
+   //             $meal_sql="select `mark` from `mark` where `exam_roll`='$roll' and `exam_id`='$exam_id' and `sub_id`='$subject'";
+   //             $meal_res=mysqli_query($con,$meal_sql);
+   //             if(mysqli_num_rows($meal_res)>0){
+   //                $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
+   //                if(mysqli_query($con,$swl)){
+   //                   // echo "Updated1";
+   //                }
+   //             }else{
+   //                $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
+   //                                                    ( '$subject', '$roll', '$class_id', '$mark','$exam_id','$time','','$year', '1')";
+   //                if(mysqli_query($con,$swl)){
+   //                    "Updated1";
+   //                }
+   //             }
+   //          }
+   //       }
+   //    }
    
-   if(isset($_POST['submit']) ){
-      $year=get_safe_value($_POST['year']);
-      $subject=get_safe_value($_POST['subject']);
-      $class_id=get_safe_value($_POST['class']);
-      $exam_id=get_safe_value($_POST['exam']);
-      $meal_sql="select `mark` from `mark` where sub_id='$subject' and class_id='$class_id'";
-      $meal_res=mysqli_query($con,$meal_sql);
-      if(mysqli_num_rows($meal_res)>0){
-         //update
-         $roll_count=count($_POST['roll'])-1;
-         $mark_count=count($_POST['mark'])-1;
-         for($i=0;$i<=intval($roll_count);$i++){
-            for($i=0;$i<=intval($mark_count);$i++){
-               $mark= get_safe_value($_POST['mark'][$i]);
-               $roll= get_safe_value($_POST['roll'][$i]);
-               $meal_sql="select `mark` from `mark` where `exam_roll`='$roll' and `exam_id`='$exam_id' and `sub_id`='$subject'";
-               $meal_res=mysqli_query($con,$meal_sql);
-               if(mysqli_num_rows($meal_res)>0){
-                  $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
-                  if(mysqli_query($con,$swl)){
-                     // echo "Updated1";
-                  }
-               }else{
-                  $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
-                                                      ( '$subject', '$roll', '$class_id', '$mark','$exam_id','$time','','$year', '1')";
-                  if(mysqli_query($con,$swl)){
-                     // echo "Updated1";
-                  }
-               }
-            }
-         }
-         $_SESSION['UPDATE']=1;
-         // redirect("markEntry");
-      }else{
-         //insert
-         $roll_count=count($_POST['roll'])-1;
-         $mark_count=count($_POST['mark'])-1;
-         for($i=0;$i<=intval($roll_count);$i++){
-            for($i=0;$i<=intval($mark_count);$i++){
-               $mark= get_safe_value($_POST['mark'][$i]);
-               $roll= get_safe_value($_POST['roll'][$i]);
-               $meal_sql="select `mark` from `mark` where `exam_roll`='$roll' and `exam_id`='$exam_id' and `sub_id`='$subject'";
-               $meal_res=mysqli_query($con,$meal_sql);
-               if(mysqli_num_rows($meal_res)>0){
-                  $swl="UPDATE `mark` SET `mark` = '$mark' WHERE `exam_roll` = '$roll' and class_id='$class_id' and exam_id='$exam_id' and sub_id='$subject' and year='$year'";
-                  if(mysqli_query($con,$swl)){
-                     // echo "Updated1";
-                  }
-               }else{
-                  $swl="INSERT INTO `mark` ( `sub_id`, `exam_roll`, `class_id`, `mark`, `exam_id`, `added_on`,`updated_on`,`year`, `status`) VALUES 
-                                                      ( '$subject', '$roll', '$class_id', '$mark','$exam_id','$time','','$year', '1')";
-                  if(mysqli_query($con,$swl)){
-                      "Updated1";
-                  }
-               }
-            }
-         }
-      }
-   
-   }
-   
-   
+   // }
    ?>
 <div class="dashboard-content-one">
    <!-- Breadcubs Area Start Here -->
@@ -144,9 +176,9 @@
                                  <?php
                                     $data=[
                                           'name'=>[
+                                             '2025',
+                                             '2024',
                                              '2023',
-                                             '2022',
-                                             '2021',
                                           ]
                                        ];
                                     $count=count($data['name']);
@@ -308,6 +340,7 @@
    <?php }?>
 </div>
 </div>
+
 <?php include("footer.php")?>
 <script>
    function checkAll() {

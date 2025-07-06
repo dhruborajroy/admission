@@ -1,6 +1,5 @@
 <?php
    include("header.php");
-
    if(isset($_SESSION['APPLICANT_LOGIN'])){
       redirect('dashboard');
    }
@@ -29,112 +28,121 @@
    $local_guardian_nid="sf";
    $image="";
    $birthID="234";
-   if(isset($_POST['submit'])){
-   	$first_name=ucfirst(get_safe_value($_POST['first_name']));
-   	$last_name=ucfirst(get_safe_value($_POST['last_name']));
-   	$f_name=ucfirst(get_safe_value($_POST['f_name']));
-   	$f_nid=ucfirst(get_safe_value($_POST['f_nid']));
-   	$m_name=ucfirst(get_safe_value($_POST['m_name']));
-   	$m_nid=ucfirst(get_safe_value($_POST['m_nid']));
-   	$phone_number=get_safe_value($_POST['phone_number']);
-   	$email=get_safe_value($_POST['email']);
-   	$present_address=get_safe_value($_POST['present_address']);
-   	$permanent_address=get_safe_value($_POST['permanent_address']);
-   	$gender=get_safe_value($_POST['gender']);
-   	$blood_group=get_safe_value($_POST['blood_group']);
-   	$local_guardian_name=get_safe_value($_POST['local_guardian_name']);
-   	$localGuardianNid=get_safe_value($_POST['localGuardianNid']);
-   	$birthID=get_safe_value($_POST['birthID']);
-   	$class=get_safe_value($_POST['class']);
-   	$dob=get_safe_value($_POST['dob']);
-   	$quota=get_safe_value($_POST['quota']);
-      $password=rand(111111,999999);
-   	$religion=get_safe_value($_POST['religion']);
-      if(mysqli_num_rows(mysqli_query($con,"select id from applicants where phoneNumber='$phone_number'"))>0){
-         $_SESSION['TOASTR_MSG']=array(
-            'type'=>'error',
-            'body'=>'Phone number is already added',
-            'title'=>'Error',
-         ); 
-      }else{
-         $roll=date('y').rand(1111,9999);
-         if($id==''){
-            $info=getimagesize($_FILES['image']['tmp_name']);
-            $width = $info[0];
-            $height = $info[1];
-            if(isset($info['mime'])){
-               if($info['mime']=="image/jpeg"){
-                  $img=imagecreatefromjpeg($_FILES['image']['tmp_name']);
-               }elseif($info['mime']=="image/png"){
-                  $img=imagecreatefrompng($_FILES['image']['tmp_name']);
-               }else{
-                  $_SESSION['TOASTR_MSG']=array(
-                     'type'=>'error',
-                     'body'=>'Only select jpg or png image',
-                     'title'=>'Error',
-                  );
-               }
-               if(isset($img)){
-                  if (($_FILES["image"]["size"] > 1000000)) {
-                     $_SESSION['TOASTR_MSG']=array(
-                        'type'=>'error',
-                        'body'=>'Image size exceeds 1 MB',
-                        'title'=>'Error',
-                     );
-                  }else{
-                     $id=PREFIX.substr(strtoupper(md5(uniqid())),0,4);;
-                     $insert_id=$id;
-                     $code=rand(111111,999999);
-                     $image=time().'.jpg';
-                     imagejpeg($img,UPLOAD_APPLICANT_IMAGE.$image,100);
-                     $sql="INSERT INTO `applicants`(`id`, `first_name`,`last_name`,  `roll`, `fName`, `mName`, `phoneNumber`, `presentAddress`, `permanentAddress`, `dob`, `gender`, `religion`, `birthId`, `quota`, `bloodGroup`, `examRoll`, `merit`, `localGuardianName`, `localGuardianNid`, `password`, `email`, `code`, `image`, `last_notification`,`class`,`fNid`,`mNid`,`final_submit`, `status`) 
-                           VALUES ('$id','$first_name','$last_name','$roll','$f_name','$m_name','$phone_number','$present_address','$permanent_address','$dob','$gender','$religion','$birthID','$quota','$blood_group','$roll','','$local_guardian_name','$local_guardian_nid','$password','$email','$code','$image','','$class','$f_nid','$m_nid','0','0')";
-                     if(mysqli_query($con,$sql)){
-                        $_SESSION['TOASTR_MSG']=array(
-                           'type'=>'success',
-                           'body'=>'An OTP has been sent to your '.$phone_number.'. Please Verify your Phone number & login.',
-                           'title'=>'Success',
-                        );
-                        $otp=rand(1111,9999);
-                        $_SESSION['MOBILE_OTP']=$otp;
-                        $_SESSION['MOBILE_NUMBER']=$phone_number;
-                        $_SESSION['APPLICATION_ID']=$insert_id;
-                        $sms="Dear $first_name,Your OTP is $otp for your application and Application ID: $insert_id";
-                        // $sms_status=send_sms_greenweb($phone_number,$sms);
-                        $sms_status="sent";
-                        if($sms_status=='sent'){
-                           redirect("apply-otp-verification");
-                        }else{
-                           $_SESSION['TOASTR_MSG']=array(
-                                 'type'=>'error',
-                                 'body'=>'Sms Sending error\!',
-                                 'title'=>'Error',
-                           );
-                        }
-                     }else{
-                        // echo $sql;
-                        $_SESSION['TOASTR_MSG']=array(
-                           'type'=>'error',
-                           'body'=>'Something Went wrong!',
-                           'title'=>'Error',
-                        );
-                     }
-                  }
-               }
-            }else{
-                $_SESSION['TOASTR_MSG']=array(
-                  'type'=>'warning',
-                  'body'=>'Only select jpg or png image',
-                  'title'=>'Error',
-                );
+   if(isset($_POST['submit'])) {
+    $first_name = ucfirst(get_safe_value($_POST['first_name']));
+    $last_name = ucfirst(get_safe_value($_POST['last_name']));
+    $f_name = ucfirst(get_safe_value($_POST['f_name']));
+    $f_nid = get_safe_value($_POST['f_nid']);
+    $m_name = ucfirst(get_safe_value($_POST['m_name']));
+    $m_nid = get_safe_value($_POST['m_nid']);
+    $phone_number = get_safe_value($_POST['phone_number']);
+    $email = get_safe_value($_POST['email']);
+    $present_address = get_safe_value($_POST['present_address']);
+    $permanent_address = get_safe_value($_POST['permanent_address']);
+    $gender = get_safe_value($_POST['gender']);
+    $blood_group = get_safe_value($_POST['blood_group']);
+    $local_guardian_name = get_safe_value($_POST['local_guardian_name']);
+    $localGuardianNid = get_safe_value($_POST['localGuardianNid']);
+    $birthID = get_safe_value($_POST['birthID']);
+    $class = get_safe_value($_POST['class']);
+    $dob = get_safe_value($_POST['dob']);
+    $quota = get_safe_value($_POST['quota']);
+    $religion = get_safe_value($_POST['religion']);
+    $password = rand(111111, 999999);
+
+    // Check if phone number already exists
+    $check_phone_sql = "SELECT id FROM applicants WHERE phoneNumber='$phone_number'";
+    if (mysqli_num_rows(mysqli_query($con, $check_phone_sql)) > 0) {
+        $_SESSION['TOASTR_MSG'] = [
+            'type' => 'error',
+            'body' => 'Phone number is already added',
+            'title' => 'Error',
+        ];
+    } else {
+        $roll = date('y') . rand(1111, 9999);
+
+        // Image validation
+        $info = getimagesize($_FILES['image']['tmp_name']);
+        if ($info) {
+            $mime = $info['mime'];
+            if ($mime == "image/jpeg") {
+                $img = imagecreatefromjpeg($_FILES['image']['tmp_name']);
+            } elseif ($mime == "image/png") {
+                $img = imagecreatefrompng($_FILES['image']['tmp_name']);
+            } else {
+                $_SESSION['TOASTR_MSG'] = [
+                    'type' => 'error',
+                    'body' => 'Only select jpg or png image',
+                    'title' => 'Error',
+                ];
+                return;
             }
-         }
-         // else{
-         //    $sql="update `applicants` set  `first_name`='$first_name',`last_name`='$last_name',  `roll`='$roll',`fName`='$f_name',`fNid`='$f_nid',`mName`='$m_name',`mNid`='$m_nid',`phoneNumber`='$phone_number',`presentAddress`='$present_address',`permanentAddress`='$permanent_address',`dob`='$dob',`gender`='$gender',`religion`='$religion',`birthId`='$birthID',`quota`='$quota',`bloodGroup`='$blood_group',`legalGuardianName`='$local_guardian_name',`localGuardianNid`='$localGuardianNid',`image`='$image', `email`='$email' , `dept_id`='$dept_id' where  id='$id'";
-         //    mysqli_query($con,$sql);
-         // }
-      }
-   }
+
+            if ($_FILES["image"]["size"] > 1000000) {
+                $_SESSION['TOASTR_MSG'] = [
+                    'type' => 'error',
+                    'body' => 'Image size exceeds 1 MB',
+                    'title' => 'Error',
+                ];
+                return;
+            }
+
+            if ($img) {
+                $id = PREFIX . substr(strtoupper(md5(uniqid())), 0, 4);
+                $insert_id = $id;
+                $code = rand(111111, 999999);
+                $image_name = time() . '.jpg';
+
+                imagejpeg($img, UPLOAD_APPLICANT_IMAGE . $image_name, 100);
+
+                $sql = "INSERT INTO `applicants` 
+                        (`id`, `first_name`, `last_name`, `roll`, `fName`, `mName`, `phoneNumber`, `presentAddress`, `permanentAddress`, `dob`, `gender`, `religion`, `birthId`, `quota`, `bloodGroup`, `examRoll`, `merit`, `localGuardianName`, `localGuardianNid`, `password`, `email`, `code`, `image`, `last_notification`, `class`, `fNid`, `mNid`, `final_submit`, `status`) 
+                        VALUES 
+                        ('$id', '$first_name', '$last_name', '$roll', '$f_name', '$m_name', '$phone_number', '$present_address', '$permanent_address', '$dob', '$gender', '$religion', '$birthID', '$quota', '$blood_group', '$roll', '', '$local_guardian_name', '$localGuardianNid', '$password', '$email', '$code', '$image_name', '', '$class', '$f_nid', '$m_nid', '0', '0')";
+
+                if (mysqli_query($con, $sql)) {
+                    $_SESSION['TOASTR_MSG'] = [
+                        'type' => 'success',
+                        'body' => 'An OTP has been sent to your ' . $phone_number . '. Please Verify your Phone number & login.',
+                        'title' => 'Success',
+                    ];
+
+                    $otp = rand(1111, 9999);
+                    $_SESSION['MOBILE_OTP'] = $otp;
+                    $_SESSION['MOBILE_NUMBER'] = $phone_number;
+                    $_SESSION['APPLICATION_ID'] = $insert_id;
+
+                    $sms = "Dear $first_name, Your OTP is $otp for your application and Application ID: $insert_id";
+                    // $sms_status = send_sms_greenweb($phone_number, $sms);
+                    $sms_status = "sent";
+
+                    if ($sms_status == 'sent') {
+                        redirect("apply-otp-verification");
+                    } else {
+                        $_SESSION['TOASTR_MSG'] = [
+                            'type' => 'error',
+                            'body' => 'SMS sending error!',
+                            'title' => 'Error',
+                        ];
+                    }
+                } else {
+                    $_SESSION['TOASTR_MSG'] = [
+                        'type' => 'error',
+                        'body' => 'Something went wrong!',
+                        'title' => 'Error',
+                    ];
+                }
+            }
+        } else {
+            $_SESSION['TOASTR_MSG'] = [
+                'type' => 'warning',
+                'body' => 'Only select jpg or png image',
+                'title' => 'Error',
+            ];
+        }
+    }
+}
+
 ?>
 <div class="breadcrumb-bar">
    <div class="container">
@@ -156,93 +164,6 @@
 </div>
 <section class="course-content checkout-widget">
 
-   <!-- start -->
-   <div class="container">
-         <div class="col-md-12">
-            <div class="settings-widget">
-               <div class="settings-inner-blk p-0">
-                  <div class="sell-course-head comman-space">
-                     <h3 align="center">Basic Informations</h3>
-                     <form method="POST" enctype="multipart/form-data">
-                        <div class="row">
-                           <div class="col-lg-12 row">
-                              <div class="col-lg-6">
-                                 <div class="form-group">
-                                    <label class="form-control-label">First Name <span class="text-danger">*</span></label>
-                                    <input type="text" value="<?php echo $first_name?>" name="first_name" id="first_name"  class="form-control" placeholder="Enter your first Name" required>
-                                 </div>
-                              </div>
-                              <div class="col-lg-6">
-                                 <div class="form-group">
-                                    <label class="form-control-label">Last Name <span class="text-danger">*</span></label>
-                                    <input type="text" value="<?php echo $last_name?>" name="last_name" id="last_name" class="form-control"  placeholder="Enter your last Name">
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-lg-12 row">
-                              <div class="col-lg-6">
-                                 <div class="form-group">
-                                    <label class="form-control-label">Date of Birth <span class="text-danger">*</span></label>
-                                    <input type="text" autocomplete="off" name="dob" id="dob"  value="<?php echo $dob?>" class="form-control air-datepicker" placeholder="dd/mm/yyyy" required>
-                                 </div>
-                              </div>
-                              <div class="col-lg-6">
-                                 <div class="form-group">
-                                    <label class="form-label">Gender <span class="text-danger">*</span></label>
-                                    <select class="form-select select" name="gender" id="gender" required>
-                                       <option value="0">Select Gender</option>
-                                       <?php
-                                          $data=[
-                                                'name'=>[
-                                                   'Male',
-                                                   'Female',
-                                                   'Other',
-                                                ]
-                                             ];
-                                          $count=count($data['name']);
-                                          for($i=0;$i<$count;$i++){
-                                             if($data['name'][$i]==$gender){
-                                                   echo "<option selected='selected' value=".$data['name'][$i].">".$data['name'][$i]."</option>";
-                                             }else{
-                                                   echo "<option value=".$data['name'][$i].">".$data['name'][$i]."</option>";
-                                             }                                                        
-                                          }
-                                          ?>
-                                    </select>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-lg-12 row">
-                              <div class="col-lg-6">
-                                 <div class="form-group">
-                                    <label class="form-control-label">Phone Number <span class="text-danger">*</span></label>
-                                    <div class="input-group mb-3">
-                                       <span class="input-group-text" id="verifyEmailOTP"  >+88</span>
-                                       <input required type="text" autocomplete="off" pattern="^(?:(?:\+|00)88|01)?(?:\d{11}|\d{13})$" title="Please enter correct format and length. ex: 017xxxxxx" name="phone_number"  value="<?php echo $phone_number?>" id="phone_number" class="form-control" placeholder="Applicant's Phone Number ex: 017xxxx">
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-lg-6">
-                                 <div class="form-group">
-                                    <label class="form-control-label">Birth Certificate Number <span class="text-danger">*</span></label>
-                                    <input required type="number" autocomplete="off" name="birthID" id="birthID" value="<?php echo $birthID?>" class="form-control" placeholder="Birth Certificate Number">
-                                 </div>
-                              </div>
-                              <div class="col-lg-6">
-                                 <div class="form-group">
-                                    <label class="form-control-label">Email</label>
-                                    <input type="email" autocomplete="off" name="email" id="email" value="<?php echo $email?>" class="form-control" placeholder="Enter email">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end -->
       <!-- start -->
       <div class="container">
          <div class="col-md-12">
@@ -353,6 +274,93 @@
                                  </select>
                               </div>
                            </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end -->
+   <!-- start -->
+   <div class="container">
+         <div class="col-md-12">
+            <div class="settings-widget">
+               <div class="settings-inner-blk p-0">
+                  <div class="sell-course-head comman-space">
+                     <h3 align="center">Basic Informations</h3>
+                     <form method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                           <div class="col-lg-12 row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" value="<?php echo $first_name?>" name="first_name" id="first_name"  class="form-control" placeholder="Enter your first Name" required>
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" value="<?php echo $last_name?>" name="last_name" id="last_name" class="form-control"  placeholder="Enter your last Name">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-lg-12 row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">Date of Birth <span class="text-danger">*</span></label>
+                                    <input type="text" autocomplete="off" name="dob" id="dob"  value="<?php echo $dob?>" class="form-control air-datepicker" placeholder="dd/mm/yyyy" required>
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                    <select class="form-select select" name="gender" id="gender" required>
+                                       <option value="0">Select Gender</option>
+                                       <?php
+                                          $data=[
+                                                'name'=>[
+                                                   'Male',
+                                                   'Female',
+                                                   'Other',
+                                                ]
+                                             ];
+                                          $count=count($data['name']);
+                                          for($i=0;$i<$count;$i++){
+                                             if($data['name'][$i]==$gender){
+                                                   echo "<option selected='selected' value=".$data['name'][$i].">".$data['name'][$i]."</option>";
+                                             }else{
+                                                   echo "<option value=".$data['name'][$i].">".$data['name'][$i]."</option>";
+                                             }                                                        
+                                          }
+                                          ?>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-lg-12 row">
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">Phone Number <span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                       <span class="input-group-text" id="verifyEmailOTP"  >+88</span>
+                                       <input required type="text" autocomplete="off" pattern="^(?:(?:\+|00)88|01)?(?:\d{11}|\d{13})$" title="Please enter correct format and length. ex: 017xxxxxx" name="phone_number"  value="<?php echo $phone_number?>" id="phone_number" class="form-control" placeholder="Applicant's Phone Number ex: 017xxxx">
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">Birth Certificate Number <span class="text-danger">*</span></label>
+                                    <input required type="number" autocomplete="off" name="birthID" id="birthID" value="<?php echo $birthID?>" class="form-control" placeholder="Birth Certificate Number">
+                                 </div>
+                              </div>
+                              <div class="col-lg-6">
+                                 <div class="form-group">
+                                    <label class="form-control-label">Email</label>
+                                    <input type="email" autocomplete="off" name="email" id="email" value="<?php echo $email?>" class="form-control" placeholder="Enter email">
+                                 </div>
+                              </div>
                            </div>
                         </div>
                      </div>

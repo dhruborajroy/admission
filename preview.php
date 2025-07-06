@@ -67,14 +67,17 @@ $createPayment['bkashURL']="";
 $createPayment['message']="";
 $total_amount=round(intval(FORM_AMOUNT)*(1+SERVICE_CHARGE),2);
 if(isset($_POST['bkash'])){
+   // pr($_POST);
    $amount=round($total_amount,2);
    $token=timeWiseTokenGeneartion();
+   // pr($token);
    $user_data=array(
       'tran_id'=>uniqid("admission_"),
       'amount'=>$amount,
    );
    if(isset($token['id_token'])){
       $createPayment=createPayment($token['id_token'],$user_data);
+      // pr($createPayment);
       if(isset($createPayment['message'])){
          $msg= $createPayment['message'];
       }

@@ -95,7 +95,7 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
                         <table class="table table-borderless mb-0">
                            <thead>
                               <tr>
-                                 <th>Order id</th>
+                                 <th>Application id</th>
                                  <th>amount</th>
                                  <th>Date</th>
                                  <th>TrxID</th>
@@ -112,7 +112,7 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
                               while($payment_row=mysqli_fetch_assoc($payment_res)){
                               ?>
                               <tr>
-                                 <td><a href="pdfreports/invoice?invoice_id=<?php echo $payment_row['tran_id']?>" class="invoice-no">#<?php echo $payment_row['tran_id']?></a></td>
+                                 <td><a href="pdfreports/invoice?invoice_id=<?php echo $payment_row['tran_id']?>" class="invoice-no"><?php echo $payment_row['user_id']?></a></td>
                                  <td><?php echo $payment_row['amount']?></td>
                                  <td><?php echo date("d M Y h:i A",$payment_row['updated_on'])?></td>
                                  <td><?php echo $payment_row['trxID']?></td>
@@ -147,6 +147,10 @@ if(isset($_GET['bkash_payment_id']) && $_GET['bkash_payment_id']!==""){
                                        <h3 align="center">Basic Informations</h3>
                                        <table id="preview">
                                           <tbody>
+                                             <tr>
+                                                <td>Application ID: </td>
+                                                <td><?php echo $row['id']?></td>
+                                             </tr>
                                              <tr>
                                                 <td>First Name: </td>
                                                 <td><?php echo $first_name?></td>

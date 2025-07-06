@@ -56,6 +56,12 @@ if(!isset($_GET['invoice_id']) || $_GET['invoice_id']==""){
         </tr>';
             $html.='
             <tr>
+                <td align="Left" style="padding-top:10px;padding-left:20px;padding-bottom:10px;">
+                Application ID: '.$row['id'].'
+                </td>
+            </tr>';
+            $html.='
+            <tr>
                 <td align="Left" style="padding-top:5px;padding-left:20px;">
                 Name: '.$row['first_name'].' '.$row['last_name'].'
                 </td>

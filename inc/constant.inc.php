@@ -12,15 +12,6 @@ define('STUDENT_IMAGE',FRONT_SITE_PATH."/media/users/");
 define('UPLOAD_APPLICANT_IMAGE',$_SERVER['DOCUMENT_ROOT']."/admission/media/users/");
 define('UPLOAD_STUDENT_IMAGE',$_SERVER['DOCUMENT_ROOT']."/admission/media/users/");
 
-// Bkash Test Constants
-define("APP_KEY","4f6o0cjiki2rfm34kfdadl1eqq");
-define("APP_SECRET","2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b");
-define("USERNAME","sandboxTokenizedUser02");
-define("PASSWORD","sandboxTokenizedUser02@12345");
-define("BASE_URL",'https://tokenized.sandbox.bka.sh/v1.2.0-beta');
-define("FORM_AMOUNT",320);
-define("SERVICE_CHARGE",0);
-//Bkash live credentials
 
 
 $curStr=$_SERVER['REQUEST_URI'];

@@ -54,8 +54,7 @@ color: white;
 }
 </style>';
 
-$id='NPKKGSC75D9';
-$sql="SELECT * FROM `applicants`";
+$sql="select applicants.*,bkash_online_payment.user_id,bkash_online_payment.trxID,bkash_online_payment.bkash_payment_id from applicants,bkash_online_payment where bkash_online_payment.user_id=applicants.id and bkash_online_payment.status='Completed' order by id desc";
 $res=mysqli_query($con,$sql);
 if(mysqli_num_rows($res)>0){
 while( $row=mysqli_fetch_assoc($res)){
@@ -115,6 +114,10 @@ while( $row=mysqli_fetch_assoc($res)){
     $html.='<table id="customers" class="mt-5">
     <tbody>
         <tr>
+            <td>Application Id: </td>
+            <td>'.$row['id'].'</td>
+        </tr>
+        <tr>
             <td>First Name: </td>
             <td>'.$first_name.'</td>
         </tr>
@@ -127,12 +130,8 @@ while( $row=mysqli_fetch_assoc($res)){
             <td>'.$dob.'</td>
         </tr>
         <tr>
-            <td>Application Id: </td>
-            <td>'.$id.'</td>
-        </tr>
-        <tr>
             <td>Password: </td>
-            <td>Has been sent to your number</td>
+            <td>'.$row['password'].'</td>
         </tr>
         <tr>
             <td>Email: </td>
@@ -217,6 +216,24 @@ while( $row=mysqli_fetch_assoc($res)){
         <tr>
             <td>Permanent Address: </td>
             <td>'.$permanentAddress.'</td>
+        </tr>
+    </tbody>
+    </table>';
+
+    $html.='<table width="100%">
+    <tr>
+       <td align="center" id="title">Payment Details(Bkash) </td>
+    </tr>
+    </table>';
+    $html.='<table id="customers">
+    <tbody>
+        <tr>
+            <td>Payment Id: </td>
+            <td>'.$row['bkash_payment_id'].'</td>
+        </tr>
+        <tr>
+            <td>Trxid: </td>
+            <td>'.$row['trxID'].'</td>  
         </tr>
     </tbody>
     </table>';

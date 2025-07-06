@@ -12,7 +12,8 @@ if(!isset($_SESSION['APPLICANT_LOGIN'])){
                      <?php 
                      $id=$_SESSION['APPLICANT_ID'];
                      // SELECT mark.* ,sum(mark) as total, RANK() OVER(ORDER BY sum(mark) DESC) as `rank` FROM mark group by exam_roll;;
-                     $row=mysqli_fetch_assoc(mysqli_query($con,"select merit from applicants where id='$id'"));
+                     $ssqqll="select merit from applicants where id='$id'";
+                     $row=mysqli_fetch_assoc(mysqli_query($con,$ssqqll));
                      // pr($row);
                      if($row['merit']!==""){?>
                         <div class="col-md-4 d-flex">

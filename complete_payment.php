@@ -54,6 +54,7 @@
 //Bkash Payment started
 $total_amount=round(intval(FORM_AMOUNT)*(1+SERVICE_CHARGE),2);
 if(isset($_POST['bkash'])){
+   // pr($_POST);
    $amount=round($total_amount,2);
    $token=timeWiseTokenGeneartion();
    $user_data=array(
@@ -61,10 +62,12 @@ if(isset($_POST['bkash'])){
       'amount'=>$amount,
    );
    if(isset($token['id_token'])){
+
       $createPayment=createPayment($token['id_token'],$user_data);
       if(isset($createPayment['message'])){
          $msg= $createPayment['message'];
       }
+
       if(isset($createPayment['statusCode']) && $createPayment['statusCode']==000){
          $statusMessage=$createPayment['statusMessage'];
          $paymentID=$createPayment['paymentID'];
